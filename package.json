@@ -6,13 +6,15 @@
   "scripts": {
     "start": "node ./dist/index.js",
     "dev": "nodemon ./src/index.ts",
-    "build": "tsc"
+    "build": "tsc",
+    "lint": "eslint src --fix"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@types/express": "^4.17.21",
+    "@typescript-eslint/eslint-plugin": "^6.19.0",
     "eslint": "^8.56.0",
     "nodemon": "^3.0.3",
     "ts-node": "^10.9.2",
