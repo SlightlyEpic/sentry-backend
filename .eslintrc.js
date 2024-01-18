@@ -13,6 +13,7 @@ module.exports = {
   rules: {
     'prefer-const': 'off',
     'semi': 'error',
-    'indent': ['error', 4]
+    'indent': ['error', 4],
+    'quotes': ['error', 'single']
   },
 }
