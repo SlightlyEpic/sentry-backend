@@ -8,3 +8,8 @@ dist
 .env
 .env.local
 .env.production
+
+# temporary files
+# like local kv db
+temp/*
+!temp/gitPleaseTrackThisDirectory.txt

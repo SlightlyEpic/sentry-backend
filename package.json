@@ -27,11 +27,14 @@
     "typescript": "^5.3.3"
   },
   "dependencies": {
+    "@deno/kv": "^0.7.0",
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "express-session": "^1.17.3",
+    "express-session-sqlite": "^2.1.1",
     "passport": "^0.7.0",
-    "passport-discord": "^0.1.4"
+    "passport-discord": "^0.1.4",
+    "sqlite3": "^5.1.7"
   }
 }
