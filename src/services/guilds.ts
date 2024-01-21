@@ -3,7 +3,7 @@ import type { Bot } from './bot';
 
 type GuildInfo = {
     allowed?: boolean        // Does user have sufficient permissions to change settings in this guild
-    image: string
+    icon: string
     name: string
     id: string
 };
@@ -14,7 +14,7 @@ export class UserGuilds {
     refreshToken: string;
     bot: Bot;
     oauth: DiscordOAuth2;
-    private mutualGuilds?: GuildInfo[];
+    private mutualGuildsCache?: GuildInfo[];
 
     constructor(userId: string, accessToken: string, refreshToken: string, botService: Bot) {
         this.userId = userId;
@@ -39,15 +39,23 @@ export class UserGuilds {
         return this.oauth.getGuildMember(this.accessToken, guildId);
     }
 
-    async getMutualGuilds(): Promise<GuildInfo[]> {
-        if(this.mutualGuilds) return this.mutualGuilds;
-        else return this.forceGetMutualGuilds();
-    }
+    async getMutualGuilds(options?: { skipCache: boolean }): Promise<GuildInfo[]> {
+        if(this.mutualGuildsCache && !options?.skipCache) return this.mutualGuildsCache;
 
-    async forceGetMutualGuilds(): Promise<GuildInfo[]> {
-        const userGuilds = this.oauth.getUserGuilds(this.accessToken);
+        const userGuilds = await this.oauth.getUserGuilds(this.accessToken);
         const botGuilds = this.bot.getGuilds();
 
-        return [];
+        let mutualGuilds = userGuilds
+            .filter(guild => botGuilds.has(guild.id))
+            .map(guild => {
+                return {
+                    icon: guild.icon,
+                    id: guild.id,
+                    name: guild.name
+                } as GuildInfo;
+            });
+
+        this.mutualGuildsCache = mutualGuilds;
+        return mutualGuilds;
     }
 }
