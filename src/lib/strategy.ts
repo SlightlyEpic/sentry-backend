@@ -1,17 +1,14 @@
 import passport from 'passport';
 import { Profile, Strategy } from 'passport-discord';
-import { openKv } from '@deno/kv';
+import type { Kv } from '@deno/kv';
 
-type PassportUser = {
+export type PassportUser = {
     id: string
     accessToken: string
     refreshToken: string
 };
 
-export const init = async () => {
-    const kv = await openKv('temp/kv.db');
-    console.log('kv open');
-
+export const init = async (kv: Kv) => {
     // I have no idea how to strong type user
     // See: https://stackoverflow.com/questions/65772869/how-do-i-type-hint-the-user-argument-when-calling-passport-serializeuser-in-type
     // The above does not work, I have dug through the library types and its beyond me
