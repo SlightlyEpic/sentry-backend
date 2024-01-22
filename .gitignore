@@ -13,3 +13,5 @@ dist
 # like local kv db
 temp/*
 !temp/gitPleaseTrackThisDirectory.txt
+
+docs/example_data.json

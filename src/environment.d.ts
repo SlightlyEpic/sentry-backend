@@ -9,6 +9,7 @@ declare global {
             DISCORD_CLIENT_SECRET: string
             DISCORD_REDIRECT_URL: string
             DISCORD_TOKEN: string
+            MONGO_CONNECTION_URI: string
         }
     }
 }
