@@ -1,5 +1,5 @@
 import DiscordOAuth2 from 'discord-oauth2';
-import type { Bot } from './bot';
+import type { BotService } from './bot';
 
 type GuildInfo = {
     allowed?: boolean        // Does user have sufficient permissions to change settings in this guild
@@ -8,15 +8,48 @@ type GuildInfo = {
     id: string
 };
 
-export class UserGuilds {
+export class UserGuildsService {
+    users: Map<string, UserGuildManager>;
+    botService: BotService;
+    oauth: DiscordOAuth2;
+
+    constructor(botService: BotService) {
+        this.users = new Map();
+
+        if(botService) throw Error('Bot service must be initialized before being passed to UserGuilds constructor!');
+        this.botService = botService;
+
+        this.oauth = new DiscordOAuth2({
+            clientId: process.env.DISCORD_CLIENT_ID,
+            clientSecret: process.env.DISCORD_CLIENT_SECRET,
+            redirectUri: process.env.DISCORD_REDIRECT_URL,
+        });
+    }
+
+    addUser(userId: string, accessToken: string, refreshToken: string): UserGuildManager {
+        const user = new UserGuildManager(userId, accessToken, refreshToken, this.botService, this.oauth);
+        this.users.set(userId, user);
+        return user;
+    }
+
+    removeUser(userId: string): boolean {
+        return this.users.delete(userId);
+    }
+
+    getUser(userId: string): UserGuildManager | null {
+        return this.users.get(userId) || null;
+    }
+}
+
+export class UserGuildManager {
     userId: string;
     accessToken: string;
     refreshToken: string;
-    bot: Bot;
+    bot: BotService;
     oauth: DiscordOAuth2;
     private mutualGuildsCache?: GuildInfo[];
 
-    constructor(userId: string, accessToken: string, refreshToken: string, botService: Bot) {
+    constructor(userId: string, accessToken: string, refreshToken: string, botService: BotService, oauth: DiscordOAuth2) {
         this.userId = userId;
         this.accessToken = accessToken;
         this.refreshToken = refreshToken;
@@ -24,11 +57,7 @@ export class UserGuilds {
         this.bot = botService;
         if(!this.bot.isInit) throw Error('Bot service must be initialized before being passed to UserGuilds constructor!');
         
-        this.oauth = new DiscordOAuth2({
-            clientId: process.env.DISCORD_CLIENT_ID,
-            clientSecret: process.env.DISCORD_CLIENT_SECRET,
-            redirectUri: process.env.DISCORD_REDIRECT_URL,
-        });
+        this.oauth = oauth;
     }
 
     async getUserGuilds() {

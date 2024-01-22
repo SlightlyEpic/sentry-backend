@@ -1,6 +1,6 @@
 import Discord, { GatewayIntentBits } from 'discord.js';
 
-export class Bot {
+export class BotService {
     private client: Discord.Client;
     isInit: boolean;
 
