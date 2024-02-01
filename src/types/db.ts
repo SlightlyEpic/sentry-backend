@@ -1,4 +1,5 @@
 import type { APIEmbed } from 'discord.js';
+import { ObjectId } from 'mongodb';
 
 // Some fields are camel case because these are schema types
 // of an existing database
@@ -145,7 +146,7 @@ export type Application = {
 }
 
 export type Guild = {
-    _id: string
+    _id: ObjectId
     prefix: string
     custom_permits: Permit[]
     premium: Premium
