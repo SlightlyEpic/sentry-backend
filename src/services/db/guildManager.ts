@@ -12,11 +12,8 @@ export class GuildManager {
         this.filter = { _id: new ObjectId(guildId) };
     }
 
-    async data(): Promise<Guild> {
-        const doc = await this.collection.findOne(this.filter);
-        if(!doc) throw Error('Guild document not found');
-        
-        return doc;
+    async data(): Promise<Guild | null> {
+        return this.collection.findOne(this.filter);
     }
 
     /***************************************************
@@ -30,7 +27,7 @@ export class GuildManager {
             }
         };
 
-        let result = await this.collection.updateOne(this.filter, query);
+        const result = await this.collection.updateOne(this.filter, query);
         if(result.modifiedCount) return true;
         else return false;
     }
@@ -46,7 +43,7 @@ export class GuildManager {
             }
         };
 
-        let result = await this.collection.updateOne(this.filter, query);
+        const result = await this.collection.updateOne(this.filter, query);
         if(result.modifiedCount) return true;
         else return false;
     }
@@ -60,7 +57,7 @@ export class GuildManager {
             }
         };
 
-        let result = await this.collection.updateOne(this.filter, query);
+        const result = await this.collection.updateOne(this.filter, query);
         if(result.modifiedCount) return true;
         else return false;
     }
@@ -76,7 +73,7 @@ export class GuildManager {
             }
         };
 
-        let result = await this.collection.updateOne(this.filter, query);
+        const result = await this.collection.updateOne(this.filter, query);
         if(result.modifiedCount) return true;
         else return false;
     }
@@ -90,19 +87,65 @@ export class GuildManager {
             }
         };
 
-        let result = await this.collection.updateOne(this.filter, query);
+        const result = await this.collection.updateOne(this.filter, query);
         if(result.modifiedCount) return true;
         else return false;
     }
 
     /**@todo */
-    async setPermissions(permitIndex: number, permissions: string[]) {
-        
+    async setPermissions(permitName: string, permissions: string[]) {
+        const aggResult = await this.collection.aggregate<{ permitIndex: number }>([
+            {
+                $match: this.filter
+            },
+            {
+                $project: {
+                    permitIndex: {
+                        $indexOfArray: ['$custom_permits.name', permitName]
+                    }
+                }
+            }
+        ]).toArray();
+
+        if(aggResult.length === 0) throw new Error(`No permit found with name ${permitName}`);
+
+        const query: UpdateFilter<Guild> = {
+            $set: {
+                [`custom_permits.permissions.${aggResult[0].permitIndex}`]: permissions
+            }
+        };
+
+        const result = await this.collection.updateOne(this.filter, query);
+        if(result.matchedCount > 0) return true;
+        else return false;
     }
 
     /**@todo */
-    async setRoles(permitIndex: number, roles: string[]) {
+    async setRoles(permitName: string, roles: string[]) {
+        const aggResult = await this.collection.aggregate<{ permitIndex: number }>([
+            {
+                $match: this.filter
+            },
+            {
+                $project: {
+                    permitIndex: {
+                        $indexOfArray: ['$custom_permits.name', permitName]
+                    }
+                }
+            }
+        ]).toArray();
 
+        if(aggResult.length === 0) throw new Error(`No permit found with name ${permitName}`);
+
+        const query: UpdateFilter<Guild> = {
+            $set: {
+                [`custom_permits.roles.${aggResult[0].permitIndex}`]: roles
+            }
+        };
+
+        const result = await this.collection.updateOne(this.filter, query);
+        if(result.matchedCount > 0) return true;
+        else return false;
     }
 
     /***************************************************
@@ -116,7 +159,7 @@ export class GuildManager {
             }
         };
 
-        let result = await this.collection.updateOne(this.filter, query);
+        const result = await this.collection.updateOne(this.filter, query);
         if(result.modifiedCount) return true;
         else return false;
     }
@@ -128,7 +171,7 @@ export class GuildManager {
             }
         };
 
-        let result = await this.collection.updateOne(this.filter, query);
+        const result = await this.collection.updateOne(this.filter, query);
         if(result.modifiedCount) return true;
         else return false;
     }
@@ -140,7 +183,7 @@ export class GuildManager {
             }
         };
 
-        let result = await this.collection.updateOne(this.filter, query);
+        const result = await this.collection.updateOne(this.filter, query);
         if(result.modifiedCount) return true;
         else return false;
     }
@@ -152,7 +195,7 @@ export class GuildManager {
             }
         };
 
-        let result = await this.collection.updateOne(this.filter, query);
+        const result = await this.collection.updateOne(this.filter, query);
         if(result.modifiedCount) return true;
         else return false;
     }
@@ -168,7 +211,7 @@ export class GuildManager {
             }
         };
 
-        let result = await this.collection.updateOne(this.filter, query);
+        const result = await this.collection.updateOne(this.filter, query);
         if(result.modifiedCount) return true;
         else return false;
     }
@@ -180,7 +223,7 @@ export class GuildManager {
             }
         };
 
-        let result = await this.collection.updateOne(this.filter, query);
+        const result = await this.collection.updateOne(this.filter, query);
         if(result.modifiedCount) return true;
         else return false;
     }
