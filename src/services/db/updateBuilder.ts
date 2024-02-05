@@ -80,12 +80,12 @@ export class UpdateBuilder {
     }
 
     /**@todo */
-    setPermissions(permitName: string, permissions: string[]) {
-        if(!this.query.$set) this.query.$set = {};
+    setPermissions(permitIndex: number, permissions: string[]) {
+        
     }
 
     /**@todo */
-    setRoles(permitName: string, ...roles: string[]) {
+    setRoles(permitIndex: number, roles: string[]) {
 
     }
 
