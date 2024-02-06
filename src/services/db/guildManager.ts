@@ -9,7 +9,9 @@ export class GuildManager {
     constructor(guildId: string, collection: Collection<Guild>) {
         this.guildId = guildId;
         this.collection = collection;
-        this.filter = { _id: new ObjectId(guildId) };
+
+        // Unsafe type assertion because _id needs to be a string
+        this.filter = { _id: guildId as unknown as ObjectId };
     }
 
     async data(): Promise<Guild | null> {

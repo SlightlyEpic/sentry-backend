@@ -16,7 +16,7 @@ export class UserGuildsService {
     constructor(botService: BotService) {
         this.users = new Map();
 
-        if(botService) throw Error('Bot service must be initialized before being passed to UserGuilds constructor!');
+        if(!botService.isInit) throw Error('Bot service must be initialized before being passed to UserGuilds constructor!');
         this.botService = botService;
 
         this.oauth = new DiscordOAuth2({
@@ -73,6 +73,9 @@ export class UserGuildManager {
 
         const userGuilds = await this.oauth.getUserGuilds(this.accessToken);
         const botGuilds = this.bot.getGuilds();
+
+        console.log('userGuilds:', userGuilds);
+        console.log('\n\nbotGuilds:', botGuilds);
 
         let mutualGuilds = userGuilds
             .filter(guild => botGuilds.has(guild.id))

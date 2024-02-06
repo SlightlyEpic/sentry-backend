@@ -6,14 +6,10 @@ import sqlite3 from 'sqlite3';
 import sqliteStoreFactory from 'express-session-sqlite';
 
 import apiRouter from './routes/apiRouter';
-import { BotService } from './services/bot';
-import { UserGuildsService } from './services/guilds';
+import { Services } from './types/services';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export function createApp(services: {
-    botService: BotService,
-    userGuildsService: UserGuildsService
-}) {
+export function createApp(services: Services) {
     const app = express();
     const SqliteStore = sqliteStoreFactory(session);
 
@@ -45,7 +41,7 @@ export function createApp(services: {
     app.use(passport.session());
 
     // Routers
-    app.use('/api', apiRouter);
+    app.use('/api', apiRouter(services));
 
     return app;
 }

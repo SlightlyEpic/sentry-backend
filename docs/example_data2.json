@@ -1,0 +1,1208 @@
+{
+  "_id": "1191765555204599979",
+  "prefix": ">",
+  "custom_permits": [
+    {
+      "name": "Admins",
+      "locked": true,
+      "permissions": [
+        "FULL_CONTROL"
+      ],
+      "roles": [],
+      "users": []
+    },
+    {
+      "name": "Trusted Moderators",
+      "locked": false,
+      "permissions": [
+        "MANAGE_CASES",
+        "MANAGE_LOCKDOWN",
+        "MANAGE_SLOWMODE",
+        "KICK_MEMBERS",
+        "BAN_MEMBERS",
+        "MUTE_MEMBERS",
+        "WARN_MEMBERS",
+        "MANAGE_APPEALS"
+      ],
+      "roles": [],
+      "users": []
+    },
+    {
+      "name": "Moderator",
+      "locked": false,
+      "permissions": [
+        "MANAGE_CASES",
+        "KICK_MEMBERS",
+        "BAN_MEMBERS",
+        "MUTE_MEMBERS",
+        "WARN_MEMBERS"
+      ],
+      "roles": [
+        "1182554951323488286"
+      ],
+      "users": []
+    },
+    {
+      "name": "Helper",
+      "locked": false,
+      "permissions": [
+        "MANAGE_CASES",
+        "MUTE_MEMBERS",
+        "WARN_MEMBERS"
+      ],
+      "roles": [
+          "1076289922283081788",
+          "1174927697718284368"
+      ],
+      "users": []
+    }
+  ],
+  "premium": {
+    "status": true,
+    "activated_by": "550476809280421903",
+    "activated_timestamp": null,
+    "end_timestamp": null,
+    "from_code": null
+  },
+  "server_language": "english",
+  "flags": [
+    "MAIN_SERVER"
+  ],
+  "compact_responses": false,
+  "infraction_tracking": true,
+  "delete_cases_after": 15768017,
+  "cases": [
+    {
+      "id": "fDBfPDhd",
+      "created_timestamp": 1703699061,
+      "user_info": {
+        "id": "1173001972014661772",
+        "name": "ownerleo",
+        "avatar": "https://cdn.discordapp.com/avatars/1173001972014661772/6c5996770c985bcd6e5b68131ff2ba04.png?size=1024"
+      },
+      "reason": "Opening a ticket without responding or a reason",
+      "proof": null,
+      "action": {
+        "type": "warn",
+        "warn_severity": "low",
+        "active": false,
+        "ends_timestamp": null
+      },
+      "duration": null,
+      "humanized_duration": null,
+      "moderator_info": {
+        "id": {
+          "$numberLong": "550476809280421903"
+        },
+        "name": "nziie.dev",
+        "avatar": "https://cdn.discordapp.com/avatars/550476809280421903/1f0ee0ddffc9c8ebec18268e1f8b5860.png?size=1024"
+      },
+      "moderator_note": {
+        "content": null,
+        "last_edited_user": null
+      }
+    },
+    {
+      "id": "RJ6hcHIg",
+      "created_timestamp": 1703880577,
+      "user_info": {
+        "id": "1132526005710508092",
+        "name": "fwcxsred.",
+        "avatar": "https://cdn.discordapp.com/avatars/1132526005710508092/85267949e07bad6901fca7a7d0035525.png?size=1024"
+      },
+      "reason": "Trying to post a NSFW server",
+      "proof": null,
+      "action": {
+        "type": "warn",
+        "warn_severity": "low",
+        "active": false,
+        "ends_timestamp": 1704485377
+      },
+      "duration": 604800,
+      "humanized_duration": "7 days",
+      "moderator_info": {
+        "id": "1080547347538378885",
+        "name": "farfous1",
+        "avatar": "https://cdn.discordapp.com/avatars/1080547347538378885/f52f0b54876c6c9ea289262192b9f58c.png?size=1024"
+      },
+      "moderator_note": {
+        "content": null,
+        "last_edited_user": null
+      }
+    },
+    {
+      "id": "sZSFqCGu",
+      "created_timestamp": 1703892171,
+      "user_info": {
+        "id": "1068869802950672396",
+        "name": "militiryx",
+        "avatar": "https://cdn.discordapp.com/avatars/1068869802950672396/fce862d636c7b7fa2bf939e6c2305913.png?size=1024"
+      },
+      "reason": "Trying to advertise in general chat and ping everyone",
+      "proof": null,
+      "action": {
+        "type": "ban",
+        "warn_severity": null,
+        "active": false,
+        "ends_timestamp": null
+      },
+      "duration": null,
+      "humanized_duration": null,
+      "moderator_info": {
+        "id": "550476809280421903",
+        "name": "nziie.dev",
+        "avatar": "https://cdn.discordapp.com/avatars/550476809280421903/1f0ee0ddffc9c8ebec18268e1f8b5860.png?size=1024"
+      },
+      "moderator_note": {
+        "content": null,
+        "last_edited_user": null
+      }
+    },
+    {
+      "id": "Tf9yRck4",
+      "created_timestamp": 1703950805,
+      "user_info": {
+        "id": "1171067347801473125",
+        "name": "lootlegendyt",
+        "avatar": "https://cdn.discordapp.com/avatars/1171067347801473125/3e38ac0ce06e3102d1f2ccdd71116ea8.png?size=1024"
+      },
+      "reason": "DM advertising",
+      "proof": "https://media.discordapp.net/attachments/1076289924199895044/1190657335769710714/image.png?ex=65a2990e&is=6590240e&hm=8860854a4db8c8a3bf2730113a0a99cd8931772cc7947dce342abbdef0e4f0bb&",
+      "action": {
+        "type": "ban",
+        "warn_severity": null,
+        "active": false,
+        "ends_timestamp": null
+      },
+      "duration": null,
+      "humanized_duration": null,
+      "moderator_info": {
+        "id": "550476809280421903",
+        "name": "nziie.dev",
+        "avatar": "https://cdn.discordapp.com/avatars/550476809280421903/1f0ee0ddffc9c8ebec18268e1f8b5860.png?size=1024"
+      },
+      "moderator_note": {
+        "content": null,
+        "last_edited_user": null
+      }
+    },
+    {
+      "id": "eadwjNIS",
+      "created_timestamp": 1704049420,
+      "user_info": {
+        "id": "986249119502856203",
+        "name": "lfkthechinese",
+        "avatar": "https://cdn.discordapp.com/avatars/986249119502856203/fc688dcb3d0cb11a0b6364c470620b53.png?size=1024"
+      },
+      "reason": "Scam links",
+      "proof": null,
+      "action": {
+        "type": "ban",
+        "warn_severity": null,
+        "active": false,
+        "ends_timestamp": null
+      },
+      "duration": null,
+      "humanized_duration": null,
+      "moderator_info": {
+        "id": "550476809280421903",
+        "name": "nziie.dev",
+        "avatar": "https://cdn.discordapp.com/avatars/550476809280421903/1f0ee0ddffc9c8ebec18268e1f8b5860.png?size=1024"
+      },
+      "moderator_note": {
+        "content": null,
+        "last_edited_user": null
+      }
+    },
+    {
+      "id": "maJc31Dh",
+      "created_timestamp": 1704514588,
+      "user_info": {
+        "id": "1054417484603736135",
+        "name": "peak2___",
+        "avatar": "https://cdn.discordapp.com/avatars/1054417484603736135/cc8355d429690024399a02cd91b7fcde.png?size=1024"
+      },
+      "reason": "Scam links",
+      "proof": null,
+      "action": {
+        "type": "ban",
+        "warn_severity": null,
+        "active": false,
+        "ends_timestamp": null
+      },
+      "duration": null,
+      "humanized_duration": null,
+      "moderator_info": {
+        "id": "701477858786410586",
+        "name": ".ykg",
+        "avatar": "https://cdn.discordapp.com/avatars/701477858786410586/781fbc60aba91e12b83278d6ee019765.png?size=1024"
+      },
+      "moderator_note": {
+        "content": null,
+        "last_edited_user": null
+      }
+    },
+    {
+      "id": "rumjZ4VD",
+      "created_timestamp": 1704536859,
+      "user_info": {
+        "id": "1058312049777725461",
+        "name": "ebrahim8685",
+        "avatar": "https://cdn.discordapp.com/avatars/1058312049777725461/576eb42931519762f64d1b0e7205aca2.png?size=1024"
+      },
+      "reason": "Selling third party service accounts",
+      "proof": "blob:https://discord.com/f340b39f-e93d-44af-9e18-1c80bf1dcc0a",
+      "action": {
+        "type": "ban",
+        "warn_severity": null,
+        "active": false,
+        "ends_timestamp": null
+      },
+      "duration": null,
+      "humanized_duration": null,
+      "moderator_info": {
+        "id": "701477858786410586",
+        "name": ".ykg",
+        "avatar": "https://cdn.discordapp.com/avatars/701477858786410586/781fbc60aba91e12b83278d6ee019765.png?size=1024"
+      },
+      "moderator_note": {
+        "content": null,
+        "last_edited_user": null
+      }
+    },
+    {
+      "id": "Uc9QpgRk",
+      "created_timestamp": 1704753658,
+      "user_info": {
+        "id": "660449232573956098",
+        "name": "kakousz",
+        "avatar": "https://cdn.discordapp.com/avatars/660449232573956098/4f645562e6a6ccd7a02647f7d35167f1.png?size=1024"
+      },
+      "reason": "Promoting NSFW servers and attempting to ping everyone.",
+      "proof": null,
+      "action": {
+        "type": "ban",
+        "warn_severity": null,
+        "active": false,
+        "ends_timestamp": null
+      },
+      "duration": null,
+      "humanized_duration": null,
+      "moderator_info": {
+        "id": {
+          "$numberLong": "701477858786410586"
+        },
+        "name": ".ykg",
+        "avatar": "https://cdn.discordapp.com/avatars/701477858786410586/781fbc60aba91e12b83278d6ee019765.png?size=1024"
+      },
+      "moderator_note": {
+        "content": null,
+        "last_edited_user": null
+      }
+    },
+    {
+      "id": "HigHJfdA",
+      "created_timestamp": 1704875812,
+      "user_info": {
+        "id": {
+          "$numberLong": "1056934963733344319"
+        },
+        "name": "lator_tu._____________",
+        "avatar": "https://cdn.discordapp.com/embed/avatars/0.png"
+      },
+      "reason": "Promoting NSFW links and attempting to ping everyone.",
+      "proof": null,
+      "action": {
+        "type": "ban",
+        "warn_severity": null,
+        "active": false,
+        "ends_timestamp": null
+      },
+      "duration": null,
+      "humanized_duration": null,
+      "moderator_info": {
+        "id": {
+          "$numberLong": "701477858786410586"
+        },
+        "name": ".ykg",
+        "avatar": "https://cdn.discordapp.com/avatars/701477858786410586/d78f50b40fa60e28614d47a90a2fee86.png?size=1024"
+      },
+      "moderator_note": {
+        "content": null,
+        "last_edited_user": null
+      }
+    },
+    {
+      "id": "o8QtaBZq",
+      "created_timestamp": 1705042154,
+      "user_info": {
+        "id": {
+          "$numberLong": "1103907517366538270"
+        },
+        "name": "project90_",
+        "avatar": "https://cdn.discordapp.com/avatars/1103907517366538270/817399a1a124819c4d155793af2de6ec.png?size=1024"
+      },
+      "reason": "Selling Credit Cards & money service accounts",
+      "proof": null,
+      "action": {
+        "type": "ban",
+        "warn_severity": null,
+        "active": false,
+        "ends_timestamp": null
+      },
+      "duration": null,
+      "humanized_duration": null,
+      "moderator_info": {
+        "id": {
+          "$numberLong": "701477858786410586"
+        },
+        "name": ".ykg",
+        "avatar": "https://cdn.discordapp.com/avatars/701477858786410586/d78f50b40fa60e28614d47a90a2fee86.png?size=1024"
+      },
+      "moderator_note": {
+        "content": null,
+        "last_edited_user": null
+      }
+    },
+    {
+      "id": "cQ0WFb2E",
+      "created_timestamp": 1705042303,
+      "user_info": {
+        "id": {
+          "$numberLong": "1182339778692268044"
+        },
+        "name": "imahaqer432434",
+        "avatar": "https://cdn.discordapp.com/avatars/1182339778692268044/1908d3821e34ac0bfc8787b198f501aa.png?size=1024"
+      },
+      "reason": "Spamming and sending malicious links",
+      "proof": "https://media.discordapp.net/attachments/1076289924199895044/1195258702748463114/image0.jpg?ex=65b35669&is=65a0e169&hm=3f106a1b155b4e2c69c2f9f3e053add162e41131140192c83cf5ab3387fd56b2&",
+      "action": {
+        "type": "mute",
+        "warn_severity": null,
+        "active": false,
+        "ends_timestamp": 1705215103
+      },
+      "duration": 172800,
+      "humanized_duration": "2 days",
+      "moderator_info": {
+        "id": {
+          "$numberLong": "701477858786410586"
+        },
+        "name": ".ykg",
+        "avatar": "https://cdn.discordapp.com/avatars/701477858786410586/d78f50b40fa60e28614d47a90a2fee86.png?size=1024"
+      },
+      "moderator_note": {
+        "content": null,
+        "last_edited_user": null
+      }
+    },
+    {
+      "id": "2Q7OMEJV",
+      "created_timestamp": 1705184690,
+      "user_info": {
+        "id": {
+          "$numberLong": "1116929870962905118"
+        },
+        "name": "thehive4life",
+        "avatar": "https://cdn.discordapp.com/avatars/1116929870962905118/aaa3168be1e34641c09c2408d85bd906.png?size=1024"
+      },
+      "reason": "Trying to mention everyone in a message",
+      "proof": null,
+      "action": {
+        "type": "warn",
+        "warn_severity": "low",
+        "active": true,
+        "ends_timestamp": 1707776690
+      },
+      "duration": 2592000,
+      "humanized_duration": "30 days",
+      "moderator_info": {
+        "id": {
+          "$numberLong": "550476809280421903"
+        },
+        "name": "nziie.dev",
+        "avatar": "https://cdn.discordapp.com/avatars/550476809280421903/5df5fb484f2a00793771514a0a120ff1.png?size=1024"
+      },
+      "moderator_note": {
+        "content": null,
+        "last_edited_user": null
+      }
+    },
+    {
+      "id": "E0qS40Jw",
+      "created_timestamp": 1705184700,
+      "user_info": {
+        "id": {
+          "$numberLong": "550476809280421903"
+        },
+        "name": "nziie.dev",
+        "avatar": "https://cdn.discordapp.com/avatars/550476809280421903/5df5fb484f2a00793771514a0a120ff1.png?size=1024"
+      },
+      "reason": "Testing warning.",
+      "proof": null,
+      "action": {
+        "type": "warn",
+        "warn_severity": "low",
+        "active": false,
+        "ends_timestamp": 1705184710
+      },
+      "duration": 10,
+      "humanized_duration": "10 seconds",
+      "moderator_info": {
+        "id": {
+          "$numberLong": "550476809280421903"
+        },
+        "name": "nziie.dev",
+        "avatar": "https://cdn.discordapp.com/avatars/550476809280421903/5df5fb484f2a00793771514a0a120ff1.png?size=1024"
+      },
+      "moderator_note": {
+        "content": null,
+        "last_edited_user": null
+      }
+    },
+    {
+      "id": "CpNz6d0l",
+      "created_timestamp": 1705184725,
+      "user_info": {
+        "id": {
+          "$numberLong": "550476809280421903"
+        },
+        "name": "nziie.dev",
+        "avatar": "https://cdn.discordapp.com/avatars/550476809280421903/5df5fb484f2a00793771514a0a120ff1.png?size=1024"
+      },
+      "reason": "Testing warning.",
+      "proof": null,
+      "action": {
+        "type": "warn",
+        "warn_severity": "low",
+        "active": true,
+        "ends_timestamp": 1707776725
+      },
+      "duration": 2592000,
+      "humanized_duration": "30 days",
+      "moderator_info": {
+        "id": {
+          "$numberLong": "550476809280421903"
+        },
+        "name": "nziie.dev",
+        "avatar": "https://cdn.discordapp.com/avatars/550476809280421903/5df5fb484f2a00793771514a0a120ff1.png?size=1024"
+      },
+      "moderator_note": {
+        "content": null,
+        "last_edited_user": null
+      }
+    },
+    {
+      "id": "RX8MLmXf",
+      "created_timestamp": 1705192340,
+      "user_info": {
+        "id": {
+          "$numberLong": "1116929870962905118"
+        },
+        "name": "thehive4life",
+        "avatar": "https://cdn.discordapp.com/avatars/1116929870962905118/aaa3168be1e34641c09c2408d85bd906.png?size=1024"
+      },
+      "reason": "Attempting to ping everyone",
+      "proof": "https://media.discordapp.net/attachments/1076289924199895044/1195888027021623376/image0.jpg?ex=65b5a084&is=65a32b84&hm=ebc12cc2d241610d08fd98eed6d00e8ec1c4ee89cd07f88f5ed82a3cc65b15fe&",
+      "action": {
+        "type": "mute",
+        "warn_severity": null,
+        "active": false,
+        "ends_timestamp": 1705365140
+      },
+      "duration": 172800,
+      "humanized_duration": "2 days",
+      "moderator_info": {
+        "id": {
+          "$numberLong": "701477858786410586"
+        },
+        "name": ".ykg",
+        "avatar": "https://cdn.discordapp.com/avatars/701477858786410586/d78f50b40fa60e28614d47a90a2fee86.png?size=1024"
+      },
+      "moderator_note": {
+        "content": null,
+        "last_edited_user": null
+      }
+    },
+    {
+      "id": "Rt2FSZlg",
+      "created_timestamp": 1705425700,
+      "user_info": {
+        "id": {
+          "$numberLong": "1189185048725958689"
+        },
+        "name": "lindasmith0818",
+        "avatar": "https://cdn.discordapp.com/avatars/1189185048725958689/8569adcbd36c70a7578c017bf5604ea5.png?size=1024"
+      },
+      "reason": "NSFW via DMs",
+      "proof": null,
+      "action": {
+        "type": "ban",
+        "warn_severity": null,
+        "active": false,
+        "ends_timestamp": null
+      },
+      "duration": null,
+      "humanized_duration": null,
+      "moderator_info": {
+        "id": {
+          "$numberLong": "768864212859879434"
+        },
+        "name": "dr.tommi.cr",
+        "avatar": "https://cdn.discordapp.com/avatars/768864212859879434/a_c66fe6ad006206bd9420894144f9a373.gif?size=1024"
+      },
+      "moderator_note": {
+        "content": null,
+        "last_edited_user": null
+      }
+    },
+    {
+      "id": "Eo8jXCPG",
+      "created_timestamp": 1705458313,
+      "user_info": {
+        "id": {
+          "$numberLong": "1196597479160950964"
+        },
+        "name": "janerohese",
+        "avatar": "https://cdn.discordapp.com/embed/avatars/0.png"
+      },
+      "reason": "That's not needed here",
+      "proof": null,
+      "action": {
+        "type": "ban",
+        "warn_severity": null,
+        "active": false,
+        "ends_timestamp": null
+      },
+      "duration": null,
+      "humanized_duration": null,
+      "moderator_info": {
+        "id": {
+          "$numberLong": "550476809280421903"
+        },
+        "name": "nziie.dev",
+        "avatar": "https://cdn.discordapp.com/avatars/550476809280421903/5df5fb484f2a00793771514a0a120ff1.png?size=1024"
+      },
+      "moderator_note": {
+        "content": null,
+        "last_edited_user": null
+      }
+    },
+    {
+      "id": "QMOuFyJG",
+      "created_timestamp": 1705466754,
+      "user_info": {
+        "id": {
+          "$numberLong": "920970600237916171"
+        },
+        "name": "michaelsuppoo",
+        "avatar": "https://cdn.discordapp.com/embed/avatars/0.png"
+      },
+      "reason": "Bot message spam.",
+      "proof": null,
+      "action": {
+        "type": "ban",
+        "warn_severity": null,
+        "active": false,
+        "ends_timestamp": null
+      },
+      "duration": null,
+      "humanized_duration": null,
+      "moderator_info": {
+        "id": {
+          "$numberLong": "701477858786410586"
+        },
+        "name": ".ykg",
+        "avatar": "https://cdn.discordapp.com/avatars/701477858786410586/d78f50b40fa60e28614d47a90a2fee86.png?size=1024"
+      },
+      "moderator_note": {
+        "content": null,
+        "last_edited_user": null
+      }
+    },
+    {
+      "id": "8C2TuppQ",
+      "created_timestamp": 1705585231,
+      "user_info": {
+        "id": {
+          "$numberLong": "793784016871358464"
+        },
+        "name": "ytswipe",
+        "avatar": "https://cdn.discordapp.com/avatars/793784016871358464/bffef3003e4d86a350e08e45d5230890.png?size=1024"
+      },
+      "reason": "Links in general chat",
+      "proof": null,
+      "action": {
+        "type": "warn",
+        "warn_severity": "medium",
+        "active": false,
+        "ends_timestamp": null
+      },
+      "duration": null,
+      "humanized_duration": null,
+      "moderator_info": {
+        "id": {
+          "$numberLong": "701477858786410586"
+        },
+        "name": ".ykg",
+        "avatar": "https://cdn.discordapp.com/avatars/701477858786410586/d78f50b40fa60e28614d47a90a2fee86.png?size=1024"
+      },
+      "moderator_note": {
+        "content": null,
+        "last_edited_user": null
+      }
+    }
+  ],
+  "warn_punishments": [
+    {
+      "warnings_count": 3,
+      "duration_raw": "6h",
+      "duration": 21600,
+      "warning_severity": "low",
+      "action": "mute"
+    }
+  ],
+  "mod_stats": {
+    "status": "enabled",
+    "data": {
+      "550476809280421903": {
+        "adwarnings_issued": 0,
+        "warnings_issued": 4,
+        "mutes_issued": 0,
+        "kicks_issued": 0,
+        "bans_issued": 0
+      },
+      "1080547347538378885": {
+        "adwarnings_issued": 0,
+        "warnings_issued": 1,
+        "mutes_issued": 0,
+        "kicks_issued": 0,
+        "bans_issued": 0
+      },
+      "701477858786410586": {
+        "adwarnings_issued": 0,
+        "warnings_issued": 1,
+        "mutes_issued": 0,
+        "kicks_issued": 0,
+        "bans_issued": 0
+      }
+    }
+  },
+  "appeals": {
+    "enabled_categories": [],
+    "responses_channel": null,
+    "form_questions": {
+      "ban_form": [
+        "Why should you be unbanned?"
+      ],
+      "mute_form": [
+        "Why do you think you should be unmuted?"
+      ],
+      "warning_form": [
+        "Why should this warning be removed?"
+      ]
+    },
+    "data": {}
+  },
+  "adwarning_settings": {
+    "status": false,
+    "channel": null,
+    "message_template": null,
+    "send_dm": false
+  },
+  "bot_logs_channel": null,
+  "templates": {
+    "messages": [
+      {
+        "content": "",
+        "attachments": [],
+        "embed": {
+          "image": {
+            "url": "https://r.nziie.xyz/sentry-banner-image"
+          },
+          "thumbnail": {
+            "url": ""
+          },
+          "fields": [],
+          "color": 5793266,
+          "description": "# Welcome to Sentry Templates!\nIntroducing the **Template Editor** within Sentry! This cutting-edge tool empowers you to customize message content, embeds, buttons, and custom select menus extensively. Enjoy unprecedented control to craft personalized and engaging messages, perfectly tailored to your specifications. Unleash your creativity as you compose captivating and dynamic communications."
+        },
+        "buttons": [
+          "templates-docs-button",
+          "creating-messages",
+          "creating-messages-button",
+          "custom-buttons-button",
+          "documentation"
+        ],
+        "name": "Templates Guide",
+        "id": "z1UWNwWsmh",
+        "type": "NORMAL"
+      },
+      {
+        "content": "",
+        "attachments": [],
+        "embed": {
+          "footer": {
+            "text": "Start your designing with '>messages create'!",
+            "icon_url": ""
+          },
+          "image": {
+            "url": ""
+          },
+          "thumbnail": {
+            "url": ""
+          },
+          "author": {
+            "name": "",
+            "icon_url": "",
+            "url": ""
+          },
+          "fields": [],
+          "color": 5793266,
+          "description": "# Creating Messages\nDiscover unmatched convenience as you effortlessly generate message templates tailored to your exact specifications directly within Discord, eliminating the need for an external dashboard. Ignite your creativity by customizing every facet of your message, from the content to the embedded elements and buttons. The embedded section provides an extensive array of customization options, encompassing title, description, color, image, thumbnail, fields, author, and footer. With full access to these customization features, you have the freedom to design and tailor your messages to perfection.\n## Using Custom Emojis\nSentry has the ability to access emojis from any server it is present in. If Sentry is active in a server you are a part of, you can incorporate emojis from that specific server, including the emojis native to the server where you are using Sentry's template messages."
+        },
+        "buttons": [],
+        "name": "Creating Messages Embed",
+        "id": "0snaQnGbMk",
+        "type": "NORMAL"
+      },
+      {
+        "content": "",
+        "attachments": [],
+        "embed": {
+          "footer": {
+            "text": "Create a custom button with '>buttons create'!",
+            "icon_url": ""
+          },
+          "image": {
+            "url": ""
+          },
+          "thumbnail": {
+            "url": ""
+          },
+          "author": {
+            "name": "",
+            "icon_url": "",
+            "url": ""
+          },
+          "fields": [],
+          "color": 5793266,
+          "description": "# Custom Buttons\nExplore the potential of buttons in message templates by utilizing our intuitive interface. Easily craft personalized buttons to suit your preferences and allocate unique actions to each, dictating the response when clicked. Seamlessly integrate buttons into your message templates to unlock interactive and dynamic experiences.\n\n## Button Creation\nEffortlessly design button templates with the straightforward /buttons create command. Tailor these templates to your specifications and enhance their visual appeal by selecting from a variety of styles, including blurple, green, red, grey, and link. This flexibility allows you to align the buttons with your desired aesthetic, ensuring a visually pleasing design. Enjoy the simplicity and adaptability of creating striking button templates with just a few commands.\n\n## Action Assignment\nElevate your interactive experiences with the user-friendly Add Action button in the button manager. Explore a diverse range of actions, such as sending hidden or visible responses, toggling roles, delivering messages across various channels, and more. These versatile actions empower you to design engaging and dynamic user experiences that capture your audience's attention. Unleash your creativity by crafting interactive buttons that foster meaningful interactions and elevate user engagement.\n\n## Creating Self Roles\nYup! Self roles are achievable with custom button actions. Simply follow these steps:\n- Create a button with `>buttons create`\n- Add the `Toggle Role` action\n- Set the role you want to be toggled on the user\n- Save the button, and you're done!"
+        },
+        "buttons": [],
+        "name": "Custom Buttons Embed",
+        "id": "LRSN27ZhhR",
+        "type": "NORMAL"
+      },
+      {
+        "content": "",
+        "attachments": [],
+        "embed": {
+          "image": {
+            "url": ""
+          },
+          "thumbnail": {
+            "url": ""
+          },
+          "fields": [],
+          "color": 12092939,
+          "description": "# Sentry+\nPurchase Sentry+ (premium) for your server to unlock the following:\n- **Customizable server prefix**\n- Message customization for the advertisement moderation extension\n- 7 custom button actions instead of 3\n- 7 custom menu option actions instead of 3\n- Other increased rate limits\n- [Premium support](https://r.nziie.xyz/sentry-support)"
+        },
+        "buttons": [
+          "get-sentry-plus-button"
+        ],
+        "name": "Premium Message Template",
+        "id": "TYL1mtD1Ep",
+        "type": "NORMAL"
+      },
+      {
+        "content": "",
+        "attachments": [],
+        "embed": {
+          "footer": {
+            "text": "",
+            "icon_url": ""
+          },
+          "image": {
+            "url": "https://cdn.nziie.xyz/u/files/2HcsChWTVXTK"
+          },
+          "thumbnail": {
+            "url": ""
+          },
+          "author": {
+            "name": "{bot.name} v{bot.version}",
+            "icon_url": "{bot.avatar}",
+            "url": ""
+          },
+          "fields": [],
+          "color": 5793266,
+          "description": "# Sentry Help\n<:blurple_question_mark:1104928149109735468> **Help Commands**\n`{prefix}help <command>` - See a command’s description, usage, and other information.\n`{prefix}prefix` - View the server’s current prefix, customizable in the `{prefix}settings` menu.\n<:Sentry_Direction:1179664932346789930> **Documentation**\nExplore **Sentry**’s documentation at **[sentry.nziie.xyz](https://sentry.nziie.xyz)** for full guides and a commands list."
+        },
+        "buttons": [
+          "full-documentation-button",
+          "sentry-plus-button",
+          "get-sentry-plus-button",
+          "invite-bot-button",
+          "vote-on-top-gg-button"
+        ],
+        "name": "Help Command Template",
+        "id": "utv6zCcUTy",
+        "type": "NORMAL"
+      },
+      {
+        "content": "",
+        "attachments": [],
+        "embed": {
+          "footer": {
+            "text": "You will only see this once | Press \"Delete\" to dismiss.",
+            "icon_url": ""
+          },
+          "image": {
+            "url": ""
+          },
+          "thumbnail": {
+            "url": ""
+          },
+          "author": {
+            "name": "",
+            "icon_url": "",
+            "url": ""
+          },
+          "fields": [],
+          "color": 5793266,
+          "description": "👀 **_Public Server Modmail_** is coming soon! [See what it’s being based on, but better…](https://nziie.xyz/showcase/modmail-v3)"
+        },
+        "buttons": [
+          "join-support-server-button"
+        ],
+        "name": "Global Update Message Template",
+        "id": "kdXM03m14O",
+        "type": "NORMAL"
+      },
+      {
+        "content": "",
+        "attachments": [],
+        "embed": {
+          "footer": {
+            "text": "This message is made using Templates!",
+            "icon_url": ""
+          },
+          "image": {
+            "url": "https://cdn.nziie.xyz/u/files/2HcsChWTVXTK"
+          },
+          "thumbnail": {
+            "url": "https://r.nziie.xyz/sentry-logo"
+          },
+          "author": {
+            "name": "",
+            "icon_url": "",
+            "url": ""
+          },
+          "fields": [],
+          "color": 5793266,
+          "description": "# Sentry Index\nIntroducing [Sentry](https://sentry.nziie.xyz/invite), the Discord bot designed to be your ultimate moderation companion! With advanced moderation commands, custom punishments, customizable messages/buttons/menus, and customizable permission whitelists, empower your server with enhanced control and user management. Elevate your community experience effortlessly with Sentry's comprehensive features and unparalleled ease of use.\n## Features List\n- Advanced moderation (warn, adwarn, kick, mute/timeout, unmute, ban, unban)\n- Custom punishments (if a user reaches `x` warnings, they will be punished)\n- Advertisement moderation\n- Custom messages with buttons and menus\n- Message and user reporting\n- Utility (user info)"
+        },
+        "buttons": [
+          "invite-bot-button",
+          "full-documentation-button",
+          "documentation",
+          "premium-link-button",
+          "roadmap-button"
+        ],
+        "menus": [
+          "QsNaouLsHZqF"
+        ],
+        "type": "NORMAL",
+        "name": "Server Index Message",
+        "id": "qWhvpKWCKf"
+      },
+      {
+        "content": "",
+        "attachments": [],
+        "embed": {
+          "footer": {
+            "text": "Added to: {guild.name}",
+            "icon_url": "{guild.icon}"
+          },
+          "image": {
+            "url": ""
+          },
+          "thumbnail": {
+            "url": "{bot.avatar}"
+          },
+          "author": {
+            "name": "{bot.name} v{bot.version}",
+            "icon_url": "{bot.avatar}",
+            "url": ""
+          },
+          "fields": [],
+          "color": 5793266,
+          "description": "## Thanks for choosing Sentry!\nSentry's default prefix is `>` for **{guild.name}**, but also responds to it's mention, `@Sentry`. Your server's prefix can be customized via [Sentry+ for $2.99/month](https://sentry.nziie.xyz/premium), which includes much more features. To view all premium perks, feel free to use the `>premium` command. **Happy moderating!**"
+        },
+        "buttons": [
+          "documentation",
+          "get-sentry-plus-button",
+          "roadmap-button",
+          "vote-on-top-gg-button"
+        ],
+        "menus": [],
+        "type": "NORMAL",
+        "name": "Server Join Template",
+        "id": "D1KrWmMstT"
+      },
+      {
+        "content": "",
+        "attachments": [],
+        "embed": {
+          "image": {
+            "url": ""
+          },
+          "thumbnail": {
+            "url": ""
+          },
+          "fields": [],
+          "color": 3066993,
+          "description": "# Application Accepted\nYour response for **{application.name}** in **{guild.name}** has been **accepted** by server managers. Please visit the server for more information.\n\n*You submitted your response <t:{application.submitted_at_timestamp}:R>.*",
+          "author": {
+            "name": "{guild.name} • Applications",
+            "icon_url": "{guild.icon}",
+            "url": ""
+          },
+          "footer": {
+            "text": "",
+            "icon_url": ""
+          }
+        },
+        "buttons": [],
+        "menus": [],
+        "type": "NORMAL",
+        "name": "Default App. Accepted DM",
+        "id": "Ma8fSUCDoW"
+      },
+      {
+        "content": "",
+        "attachments": [],
+        "embed": {
+          "footer": {
+            "text": "",
+            "icon_url": ""
+          },
+          "image": {
+            "url": ""
+          },
+          "thumbnail": {
+            "url": ""
+          },
+          "author": {
+            "name": "{guild.name} • Applications",
+            "icon_url": "{guild.icon}",
+            "url": ""
+          },
+          "fields": [],
+          "color": 15548997,
+          "description": "# Application Denied\nYour response for **{application.name}** in **{guild.name}** has been **declined** by server managers. You may apply again  by using the same command in the server.\n\n*You submitted your response <t:{application.submitted_at_timestamp}:R>.*"
+        },
+        "buttons": [],
+        "menus": [],
+        "type": "NORMAL",
+        "name": "Default App. Declined DM",
+        "id": "6DLKJIK48k"
+      }
+    ],
+    "buttons": [
+      {
+        "label": "Documentation",
+        "unique_id": "documentation",
+        "color": "Link",
+        "actions": [],
+        "url": "https://sentry.nziie.xyz/guides/templates/",
+        "id": "kfXpbHWHYTvD"
+      },
+      {
+        "label": "Creating Messages",
+        "unique_id": "creating-messages-button",
+        "color": "Blurple",
+        "actions": [
+          {
+            "name": "send_template_hidden",
+            "template_name": "Creating Messages Embed"
+          }
+        ],
+        "url": "",
+        "id": "KlRkH93TxyRy"
+      },
+      {
+        "label": "Custom Buttons",
+        "unique_id": "custom-buttons-button",
+        "color": "Blurple",
+        "actions": [
+          {
+            "name": "send_template_hidden",
+            "template_name": "Custom Buttons Embed"
+          }
+        ],
+        "url": "",
+        "id": "m5G5tZT81Cp7"
+      },
+      {
+        "label": "Get Sentry+",
+        "unique_id": "get-sentry-plus-button",
+        "color": "Link",
+        "actions": [],
+        "url": "https://sentry.nziie.xyz/premium",
+        "id": "AKt4mDXF6Gae"
+      },
+      {
+        "label": "Change-log URL",
+        "unique_id": "change-log-url-button",
+        "color": "Link",
+        "actions": [],
+        "url": "https://sentry.nziie.xyz/updates/#v1-1-0",
+        "id": "dr5zOr5zWGrW"
+      },
+      {
+        "label": "Invite",
+        "unique_id": "invite-bot-button",
+        "color": "Link",
+        "actions": [],
+        "url": "https://sentry.nziie.xyz/invite",
+        "id": "awweN8sPVXpe"
+      },
+      {
+        "label": "Roadmap",
+        "unique_id": "roadmap-button",
+        "color": "Link",
+        "actions": [],
+        "url": "https://sharing.clickup.com/36041748/l/h/6-900902486041-1/c850810baf29f0f",
+        "id": "936aWwmg6nkF"
+      },
+      {
+        "label": "Premium",
+        "unique_id": "premium-link-button",
+        "color": "Link",
+        "actions": [],
+        "url": "https://sentry.nziie.xyz/premium",
+        "id": "6CEgBghkTRxg"
+      },
+      {
+        "label": "Vote on Top.gg",
+        "unique_id": "vote-on-top-gg-button",
+        "color": "Link",
+        "actions": [],
+        "url": "https://top.gg/bot/999132132754600016/vote",
+        "id": "e628k6VV7d04"
+      },
+      {
+        "label": "Join Support Server",
+        "unique_id": "join-support-server-button",
+        "color": "Link",
+        "actions": [],
+        "url": "https://discord.gg/G2tfvHjRWZ",
+        "id": "hmeSMU7TpClF"
+      }
+    ],
+    "menus": [
+      {
+        "placeholder": "Pick any self roles you’d like…",
+        "options": [
+          {
+            "label": "Updates Ping",
+            "description": "This role is pinged when there are bot updates/changes.",
+            "actions": [
+              {
+                "name": "toggle_role",
+                "role": "1079439562369146880"
+              }
+            ],
+            "emoji": null
+          },
+          {
+            "label": "Status Ping",
+            "description": "This role is pinged when there are status updates.",
+            "actions": [
+              {
+                "name": "toggle_role",
+                "role": "1079439594363293767"
+              }
+            ],
+            "emoji": null
+          },
+          {
+            "label": "Poll Ping",
+            "description": "This role is pinged whenever there are polls for you to vote on.",
+            "actions": [
+              {
+                "name": "toggle_role",
+                "role": "1187556804939501608"
+              }
+            ],
+            "emoji": null
+          },
+          {
+            "label": "Giveaways Ping",
+            "description": "This role is pinged whenever there is a giveaway in the server.",
+            "actions": [
+              {
+                "name": "toggle_role",
+                "role": "1080633986222657577"
+              }
+            ],
+            "emoji": null
+          }
+        ],
+        "id": "QsNaouLsHZqF"
+      }
+    ]
+  },
+  "reports": {
+    "status": false,
+    "channel": null,
+    "data": []
+  },
+  "applications": [
+    {
+      "name": "Moderator Application",
+      "id": "n1TMFFBWh",
+      "status": true,
+      "response_channel": "1192503372356526131",
+      "questions": [
+        {
+          "question_text": "Do you have any previous experiences moderating Discord servers?",
+          "answer_type": "boolean"
+        },
+        {
+          "question_text": "How active are you out of 10?",
+          "answer_type": "multiple_choice",
+          "answer_choices": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10"
+          ],
+          "max_answers": 1
+        },
+        {
+          "question_text": "Is there anything else you'd like to add?",
+          "answer_type": "long_text"
+        }
+      ],
+      "required_roles": [],
+      "blacklisted_roles": [],
+      "ping_roles": [],
+      "add_roles": [
+          "1182554951323488286"
+      ],
+      "remove_roles": [],
+      "accepted_response_template": null,
+      "declined_response_template": null,
+      "cooldown": 10800,
+      "secondary_guild": null
+    }
+  ]
+}
