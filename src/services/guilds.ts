@@ -31,13 +31,13 @@ export class UserGuildsService {
         this.users.set(userId, user);
         return user;
     }
+    
+    getUser(userId: string, accessToken: string, refrehToken: string): UserGuildManager {
+        return this.users.get(userId) || this.addUser(userId, accessToken, refrehToken);
+    }
 
     removeUser(userId: string): boolean {
         return this.users.delete(userId);
-    }
-
-    getUser(userId: string): UserGuildManager | null {
-        return this.users.get(userId) || null;
     }
 }
 

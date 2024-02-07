@@ -1,5 +1,5 @@
 import { Guild, Message, Permit, Punishment } from '@/types/db';
-import { Collection, Filter, ObjectId, UpdateFilter } from 'mongodb';
+import { Collection, Filter, Long, UpdateFilter } from 'mongodb';
 
 export class GuildManager {
     guildId: string;
@@ -9,9 +9,7 @@ export class GuildManager {
     constructor(guildId: string, collection: Collection<Guild>) {
         this.guildId = guildId;
         this.collection = collection;
-
-        // Unsafe type assertion because _id needs to be a string
-        this.filter = { _id: guildId as unknown as ObjectId };
+        this.filter = { _id: new Long(guildId) };
     }
 
     async data(): Promise<Guild | null> {

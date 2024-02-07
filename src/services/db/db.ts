@@ -1,6 +1,5 @@
 import { Guild } from '@/types/db';
-import { Db, MongoClient, Collection, ObjectId } from 'mongodb';
-import { UpdateBuilder } from './updateBuilder';
+import { Db, MongoClient, Collection } from 'mongodb';
 import { GuildManager } from './guildManager';
 
 // CAUTION: This class will not validate permissions
@@ -19,12 +18,4 @@ export class DbService {
     guild(guildId: string): GuildManager {
         return new GuildManager(guildId, this.guildCollection);
     }
-
-    async update(guildId: string, builder: UpdateBuilder): Promise<void> {
-        const filter = { _id: new ObjectId(guildId) };
-        const query = builder.getQuery();
-        this.guildCollection.updateOne(filter, query);
-    }
 }
-
-export { UpdateBuilder };

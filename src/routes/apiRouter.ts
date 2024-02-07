@@ -1,13 +1,13 @@
 import { Router } from 'express';
 import authRouter from './auth/authRouter';
-import dbRouter from './db/dbRouter';
+import guildsRouter from './guilds/guildsRouter';
 import { Services } from '@/types/services';
 
 export default (services: Services): Router => {
     const apiRouter = Router();
 
     apiRouter.use('/auth', authRouter(services));
-    apiRouter.use('/db', dbRouter(services));
+    apiRouter.use('/guilds', guildsRouter(services));
     
     return apiRouter;
 };

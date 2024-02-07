@@ -14,4 +14,8 @@ dist
 temp/*
 !temp/gitPleaseTrackThisDirectory.txt
 
+# Example db data
 docs/example_data.json
+
+# One off scripts
+util
