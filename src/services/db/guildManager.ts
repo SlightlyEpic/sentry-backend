@@ -20,6 +20,16 @@ export class GuildManager {
      **************** General settings *****************
      ***************************************************/
 
+    prefix() {
+        type returnType = Pick<Guild, 'prefix'>;
+
+        return this.collection.findOne<returnType>(this.filter, {
+            projection: {
+                'prefix': 1
+            }
+        });
+    }
+
     async setPrefix(prefix: string) {
         const query: UpdateFilter<Guild> = {
             $set: {
@@ -35,6 +45,16 @@ export class GuildManager {
     /***************************************************
      *************** Punishment settings ***************
      ***************************************************/
+
+    punishments() {
+        type returnType = Pick<Guild, 'warn_punishments'>;
+
+        return this.collection.findOne<returnType>(this.filter, {
+            projection: {
+                'warn_punishments': 1
+            }
+        });
+    }
 
     async addPunishment(punishment: Punishment) {
         const query: UpdateFilter<Guild> = {
@@ -65,6 +85,16 @@ export class GuildManager {
     /***************************************************
      ***************** Permit settings *****************
      ***************************************************/
+
+    permits() {
+        type returnType = Pick<Guild, 'custom_permits'>;
+
+        return this.collection.findOne<returnType>(this.filter, {
+            projection: {
+                'custom_permits': 1
+            }
+        });
+    }
     
     async addPermit(permit: Permit) {
         const query: UpdateFilter<Guild> = {
@@ -92,7 +122,6 @@ export class GuildManager {
         else return false;
     }
 
-    /**@todo */
     async setPermissions(permitName: string, permissions: string[]) {
         const aggResult = await this.collection.aggregate<{ permitIndex: number }>([
             {
@@ -120,7 +149,6 @@ export class GuildManager {
         else return false;
     }
 
-    /**@todo */
     async setRoles(permitName: string, roles: string[]) {
         const aggResult = await this.collection.aggregate<{ permitIndex: number }>([
             {
@@ -151,6 +179,16 @@ export class GuildManager {
     /***************************************************
      ********** Advertisment Warning settings **********
      ***************************************************/
+
+    adwarnSettings() {
+        type returnType = Pick<Guild, 'adwarning_settings'>;
+
+        return this.collection.findOne<returnType>(this.filter, {
+            projection: {
+                'adwarning_settings': 1
+            }
+        });
+    }
 
     async setAdwarnStatus(status: boolean) {
         const query: UpdateFilter<Guild> = {
@@ -204,6 +242,16 @@ export class GuildManager {
      ***************** Report settings *****************
      ***************************************************/
 
+    reportSettings() {
+        type returnType = Pick<Guild, 'reports'>;
+
+        return this.collection.findOne<returnType>(this.filter, {
+            projection: {
+                'reports': 1
+            }
+        });
+    }
+
     async setReportsStatus(status: boolean) {
         const query: UpdateFilter<Guild> = {
             $set: {
@@ -226,5 +274,29 @@ export class GuildManager {
         const result = await this.collection.updateOne(this.filter, query);
         if(result.modifiedCount) return true;
         else return false;
+    }
+
+    /***************************************************
+     ****************** Other getters ******************
+     ***************************************************/
+
+    templates() {
+        type returnType = Pick<Guild, 'templates'>;
+
+        return this.collection.findOne<returnType>(this.filter, {
+            projection: {
+                'templates': 1
+            }
+        });
+    }
+
+    applications() {
+        type returnType = Pick<Guild, 'applications'>;
+
+        return this.collection.findOne<returnType>(this.filter, {
+            projection: {
+                'applications': 1
+            }
+        });
     }
 }
