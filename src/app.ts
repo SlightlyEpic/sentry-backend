@@ -13,6 +13,7 @@ export function createApp(services: Services) {
     const app = express();
     const SqliteStore = sqliteStoreFactory(session);
 
+    app.set('trust proxy', true);
     app.use(express.json());
 
     // cors

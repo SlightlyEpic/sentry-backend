@@ -8,6 +8,9 @@ dependencies:
   '@deno/kv':
     specifier: ^0.7.0
     version: 0.7.0
+  '@isaacs/ttlcache':
+    specifier: ^1.4.1
+    version: 1.4.1
   cors:
     specifier: ^2.8.5
     version: 2.8.5
@@ -23,15 +26,15 @@ dependencies:
   express:
     specifier: ^4.18.2
     version: 4.18.2
+  express-rate-limit:
+    specifier: ^7.1.5
+    version: 7.1.5(express@4.18.2)
   express-session:
     specifier: ^1.17.3
     version: 1.17.3
   express-session-sqlite:
     specifier: ^2.1.1
     version: 2.1.1
-  lru-cache:
-    specifier: ^10.2.0
-    version: 10.2.0
   mongodb:
     specifier: ^6.3.0
     version: 6.3.0
@@ -274,6 +277,11 @@ packages:
   /@humanwhocodes/object-schema@2.0.2:
     resolution: {integrity: sha512-6EwiSjwWYP7pTckG6I5eyFANjPhmPjUX9JRLUSfNPC7FX7zK9gyZAfUEaECL6ALTpGX5AjnBq3C9XmVWPitNpw==}
     dev: true
+
+  /@isaacs/ttlcache@1.4.1:
+    resolution: {integrity: sha512-RQgQ4uQ+pLbqXfOmieB91ejmLwvSgv9nLx6sT6sD83s7umBypgg+OIBOBbEUiJXrfpnp9j0mRhYYdzp9uqq3lA==}
+    engines: {node: '>=12'}
+    dev: false
 
   /@jridgewell/resolve-uri@3.1.1:
     resolution: {integrity: sha512-dSYZh7HhCDtCKm4QakX0xFpsRDqjjtZf/kjI/v3T3Nwt5r8/qz/M19F9ySyOqU94SXBmeG9ttTul+YnR4LOxFA==}
@@ -1295,6 +1303,15 @@ packages:
     engines: {node: '>=6'}
     dev: false
 
+  /express-rate-limit@7.1.5(express@4.18.2):
+    resolution: {integrity: sha512-/iVogxu7ueadrepw1bS0X0kaRC/U0afwiYRSLg68Ts+p4Dc85Q5QKsOnPS/QUjPMHvOJQtBDrZgvkOzf8ejUYw==}
+    engines: {node: '>= 16'}
+    peerDependencies:
+      express: 4 || 5 || ^5.0.0-beta.1
+    dependencies:
+      express: 4.18.2
+    dev: false
+
   /express-session-sqlite@2.1.1:
     resolution: {integrity: sha512-wbL+1uZykkXvDEPKhhJZE75gN9RBlI/WbW1g4LAYtUYS+gjtWBpJOP2x1bdgRZHUYbIFY7L8qieFvZEBsqaMlw==}
     dependencies:
@@ -1830,11 +1847,6 @@ packages:
 
   /lodash@4.17.21:
     resolution: {integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==}
-    dev: false
-
-  /lru-cache@10.2.0:
-    resolution: {integrity: sha512-2bIM8x+VAf6JT4bKAljS1qUWgMsqZRPGJS6FSahIMPVvctcNhyVp7AJu7quxOW9jwkryBReKZY5tY5JYv2n/7Q==}
-    engines: {node: 14 || >=16.14}
     dev: false
 
   /lru-cache@6.0.0:

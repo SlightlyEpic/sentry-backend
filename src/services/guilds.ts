@@ -1,7 +1,7 @@
 import DiscordOAuth2 from 'discord-oauth2';
 import type { BotService } from './bot';
-import { LRUCache } from 'lru-cache';
 import { DbService } from './db/db';
+import TTLCache from '@isaacs/ttlcache';
 
 type GuildInfo = {
     allowed?: boolean        // Does user have sufficient permissions to change settings in this guild
@@ -54,13 +54,13 @@ export class UserGuildManager {
     db: DbService;
     oauth: DiscordOAuth2;
     private mutualGuildsCache?: GuildInfo[];
-    private guildPermissionsCache: LRUCache<string, string[]>;      // guildId -> permissions array
+    private guildPermissionsCache: TTLCache<string, string[]>;      // guildId -> permissions array
 
     constructor(userId: string, accessToken: string, refreshToken: string, dbService: DbService, botService: BotService, oauth: DiscordOAuth2) {
         this.userId = userId;
         this.accessToken = accessToken;
         this.refreshToken = refreshToken;
-        this.guildPermissionsCache = new LRUCache({ maxSize: 128 });
+        this.guildPermissionsCache = new TTLCache({ max: 10, ttl: 2 * 60 * 1000 });
 
         this.bot = botService;
         if(!this.bot.isInit) throw Error('Bot service must be initialized before being passed to UserGuilds constructor!');
