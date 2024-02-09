@@ -1,8 +1,11 @@
 import DiscordOAuth2 from 'discord-oauth2';
 import type { BotService } from './bot';
+import { LRUCache } from 'lru-cache';
+import { DbService } from './db/db';
 
 type GuildInfo = {
     allowed?: boolean        // Does user have sufficient permissions to change settings in this guild
+    permissions?: string[]
     icon: string
     name: string
     id: string
@@ -10,11 +13,13 @@ type GuildInfo = {
 
 export class UserGuildsService {
     users: Map<string, UserGuildManager>;
+    dbService: DbService;
     botService: BotService;
     oauth: DiscordOAuth2;
 
-    constructor(botService: BotService) {
+    constructor(botService: BotService, dbService: DbService) {
         this.users = new Map();
+        this.dbService = dbService;
 
         if(!botService.isInit) throw Error('Bot service must be initialized before being passed to UserGuilds constructor!');
         this.botService = botService;
@@ -27,7 +32,7 @@ export class UserGuildsService {
     }
 
     addUser(userId: string, accessToken: string, refreshToken: string): UserGuildManager {
-        const user = new UserGuildManager(userId, accessToken, refreshToken, this.botService, this.oauth);
+        const user = new UserGuildManager(userId, accessToken, refreshToken, this.dbService, this.botService, this.oauth);
         this.users.set(userId, user);
         return user;
     }
@@ -46,17 +51,21 @@ export class UserGuildManager {
     accessToken: string;
     refreshToken: string;
     bot: BotService;
+    db: DbService;
     oauth: DiscordOAuth2;
     private mutualGuildsCache?: GuildInfo[];
+    private guildPermissionsCache: LRUCache<string, string[]>;      // guildId -> permissions array
 
-    constructor(userId: string, accessToken: string, refreshToken: string, botService: BotService, oauth: DiscordOAuth2) {
+    constructor(userId: string, accessToken: string, refreshToken: string, dbService: DbService, botService: BotService, oauth: DiscordOAuth2) {
         this.userId = userId;
         this.accessToken = accessToken;
         this.refreshToken = refreshToken;
+        this.guildPermissionsCache = new LRUCache({ maxSize: 128 });
 
         this.bot = botService;
         if(!this.bot.isInit) throw Error('Bot service must be initialized before being passed to UserGuilds constructor!');
-        
+
+        this.db = dbService;        
         this.oauth = oauth;
     }
 
@@ -68,14 +77,38 @@ export class UserGuildManager {
         return this.oauth.getGuildMember(this.accessToken, guildId);
     }
 
-    async getMutualGuilds(options?: { skipCache: boolean }): Promise<GuildInfo[]> {
+    async getGuildPermissions(guildId: string, options?: { skipCache?: boolean }): Promise<string[]> {
+        if(this.guildPermissionsCache.has(guildId) && !options?.skipCache) {
+            return this.guildPermissionsCache.get(guildId)!;
+        }
+
+        let guild = this.db.guild(guildId);
+        let permits = await guild.permits();
+
+        if(!permits) throw Error('Failed to get permits.');
+
+        let member = await this.getGuildMember(guildId);
+        let permissions = new Set<string>();
+
+        for(let permit of permits.custom_permits) {
+            for(let permitRole of permit.roles) {
+                if(member.roles.includes(permitRole)) {
+                    permit.permissions.forEach(p => permissions.add(p));
+                }
+            }
+        }
+
+        let perArr = Array.from(permissions);
+
+        this.guildPermissionsCache.set(guildId, perArr);
+        return perArr;
+    }
+
+    async getMutualGuilds(options?: { skipCache?: boolean }): Promise<GuildInfo[]> {
         if(this.mutualGuildsCache && !options?.skipCache) return this.mutualGuildsCache;
 
         const userGuilds = await this.oauth.getUserGuilds(this.accessToken);
         const botGuilds = this.bot.getGuilds();
-
-        console.log('userGuilds:', userGuilds);
-        console.log('\n\nbotGuilds:', botGuilds);
 
         let mutualGuilds = userGuilds
             .filter(guild => botGuilds.has(guild.id))

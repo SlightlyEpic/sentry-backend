@@ -23,9 +23,9 @@ const PORT = process.env.PORT || 3001;
         const botService = new BotService();
         await botService.init();
         
-        const userGuildsService = new UserGuildsService(botService);
-
         const dbService = new DbService(mongoClient);
+        
+        const userGuildsService = new UserGuildsService(botService, dbService);
 
         await discordStrategy.init(passportUserKv);
         const app = createApp({ botService, userGuildsService, dbService });
