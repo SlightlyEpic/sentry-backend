@@ -2,6 +2,7 @@ import DiscordOAuth2 from 'discord-oauth2';
 import type { BotService } from './bot';
 import { DbService } from './db/db';
 import TTLCache from '@isaacs/ttlcache';
+import { PermissionFlagsBits } from 'discord.js';
 
 type GuildInfo = {
     allowed?: boolean        // Does user have sufficient permissions to change settings in this guild
@@ -10,6 +11,11 @@ type GuildInfo = {
     name: string
     id: string
 };
+
+export type CustomPermissions = {
+    role: string[]
+    permit: string[]
+}
 
 export class UserGuildsService {
     users: Map<string, UserGuildManager>;
@@ -54,13 +60,13 @@ export class UserGuildManager {
     db: DbService;
     oauth: DiscordOAuth2;
     private mutualGuildsCache?: GuildInfo[];
-    private guildPermissionsCache: TTLCache<string, string[]>;      // guildId -> permissions array
+    private permissionsCache: TTLCache<string, string[]>;      // guildId -> permissions array
 
     constructor(userId: string, accessToken: string, refreshToken: string, dbService: DbService, botService: BotService, oauth: DiscordOAuth2) {
         this.userId = userId;
         this.accessToken = accessToken;
         this.refreshToken = refreshToken;
-        this.guildPermissionsCache = new TTLCache({ max: 10, ttl: 2 * 60 * 1000 });
+        this.permissionsCache = new TTLCache({ max: 10, ttl: 2 * 60 * 1000 });
 
         this.bot = botService;
         if(!this.bot.isInit) throw Error('Bot service must be initialized before being passed to UserGuilds constructor!');
@@ -77,9 +83,36 @@ export class UserGuildManager {
         return this.oauth.getGuildMember(this.accessToken, guildId);
     }
 
+    async getAllPermissions(guildId: string): Promise<CustomPermissions> {
+        const allPerms = {
+            role: [] as string[],
+            permit: await this.getGuildPermissions(guildId)
+        };
+
+        const rolePerms = new Set<string>();
+        const memberRoles = (await this.getGuildMember(guildId)).roles;
+        const guild = this.bot.getGuilds().get(guildId);
+
+        if(!guild) return allPerms;
+
+        guild.roles.cache.forEach(role => {
+            if(role.permissions.has(PermissionFlagsBits.Administrator) && memberRoles.includes(role.id)) {
+                rolePerms.add('ADMINISTRATOR');
+            }
+
+            if(role.permissions.has(PermissionFlagsBits.ManageGuild) && memberRoles.includes(role.id)) {
+                rolePerms.add('MANAGE_GUILD');
+            }
+        });
+
+        allPerms.role = Array.from(rolePerms);
+
+        return allPerms;
+    }
+
     async getGuildPermissions(guildId: string, options?: { skipCache?: boolean }): Promise<string[]> {
-        if(this.guildPermissionsCache.has(guildId) && !options?.skipCache) {
-            return this.guildPermissionsCache.get(guildId)!;
+        if(this.permissionsCache.has(guildId) && !options?.skipCache) {
+            return this.permissionsCache.get(guildId)!;
         }
 
         let guild = this.db.guild(guildId);
@@ -100,7 +133,7 @@ export class UserGuildManager {
 
         let perArr = Array.from(permissions);
 
-        this.guildPermissionsCache.set(guildId, perArr);
+        this.permissionsCache.set(guildId, perArr);
         return perArr;
     }
 

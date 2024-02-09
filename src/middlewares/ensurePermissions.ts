@@ -17,7 +17,10 @@ export const ensurePermissions: (services: Services) => EnsurePermsRequestHandle
         if(!user) return res.status(403).send({ error: 'Not signed in.' });
 
         if(!req.params.guildId) {
-            res.locals.memberPerms = [];
+            res.locals.memberPerms = {
+                role: [],
+                permit: []
+            };
             next();
             return;
         }
@@ -32,7 +35,20 @@ export const ensurePermissions: (services: Services) => EnsurePermsRequestHandle
         const serviceUser = services.userGuildsService.getUser(user.id, user.accessToken, user.refreshToken);
 
         try {
-            res.locals.memberPerms = await serviceUser.getGuildPermissions(req.params.guildId);
+            const allPerms = await serviceUser.getAllPermissions(req.params.guildId);
+
+            // Allow if, role permission has MANAGE_GUILD or ADMINISTRATOR
+            // or if permit permission has FULL_CONTROL
+            if(
+                !allPerms.role.includes('ADMINISTRATOR') && 
+                !allPerms.role.includes('MANAGE_GUILD') && 
+                !allPerms.permit.includes('FULL_CONTROL')
+            ) {
+                res.status(403).send({ error: 'Insufficient permissions.' });
+                return;
+            }
+
+            res.locals.memberPerms = allPerms;
             next();
         } catch(err) {
             res.status(500).send({ error: `${err}` });
