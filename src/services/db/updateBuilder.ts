@@ -5,6 +5,8 @@ import { DeepWriteable } from '@/types/typeMagic';
 // This class isnt being used
 // It might be used if I have the need for optimization and the time to make it more robust
 
+/* eslint-disable */
+
 export class UpdateBuilder {
     query: DeepWriteable<UpdateFilter<Guild>>;
 
