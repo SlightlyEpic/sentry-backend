@@ -14,6 +14,7 @@ module.exports = {
     'prefer-const': 'off',
     'semi': 'error',
     'indent': ['error', 4],
-    'quotes': ['error', 'single']
+    'quotes': ['error', 'single'],
+    '@typescript-eslint/no-explicit-any': 'off'
   },
 }

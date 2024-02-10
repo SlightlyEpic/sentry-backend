@@ -1,36 +1,30 @@
 import { PassportUser } from '@/lib/strategy';
 import { Services } from '@/types/services';
 import { RequestHandler } from 'express';
-// import TTLCache from '@isaacs/ttlcache';
 
-interface EnsurePermsRequestHandler extends RequestHandler<{ guildId?: string }> {}
+// Too much type wrestling, I give up
+// Maybe its not possible to extend the Request object without using interface merging
+// consequently changing the definition throught the code, and not just in whatever
+// routes use this middleware
 
-export const ensurePermissions: (services: Services) => EnsurePermsRequestHandler = (services: Services) => {
-    // Key: `${userId}-${guildId}`
-    // const permsCache = new TTLCache<`${string}-${string}`, string[]>({
-    //     max: 500,
-    //     ttl: 2 * 60 * 1000
-    // });
+// interface EnsurePermsRequestHandler extends RequestHandler<{ guildId?: string }> {}
+// interface EnsurePermsRequest extends Request<{ guildId?: string }> {
+//     memberPerms: CustomPermissions
+// }
 
+export const ensurePermissions: (services: Services) => RequestHandler = (services: Services) => {
     return async (req, res, next) => {
         const user = req.user as PassportUser;
         if(!user) return res.status(403).send({ error: 'Not signed in.' });
 
         if(!req.params.guildId) {
-            res.locals.memberPerms = {
-                role: [],
-                permit: []
-            };
+            // req.memberPerms = {
+            //     role: [],
+            //     permit: []
+            // };
             next();
             return;
         }
-
-        // const cacheKey = `${user.id}-${req.params.guildId}` as const;
-        // if(permsCache.has(cacheKey)) {
-        //     res.locals.memberPerms = permsCache.get(cacheKey);
-        //     next();
-        //     return;
-        // }
 
         const serviceUser = services.userGuildsService.getUser(user.id, user.accessToken, user.refreshToken);
 
@@ -48,7 +42,7 @@ export const ensurePermissions: (services: Services) => EnsurePermsRequestHandle
                 return;
             }
 
-            res.locals.memberPerms = allPerms;
+            // req.memberPerms = allPerms;
             next();
         } catch(err) {
             res.status(500).send({ error: `${err}` });
