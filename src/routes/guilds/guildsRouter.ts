@@ -76,5 +76,27 @@ export default (services: Services): Router => {
         }
     });
 
+    interface RemovePunishmentRequest extends Request<GuildPathParams, any, Punishment> {}
+    guildsRouter.post('/:guildId/punishments/remove', async (req: RemovePunishmentRequest, res) => {
+        try {
+            if(
+                typeof req.body.warningsCount !== 'number' ||
+                typeof req.body.duration_raw !== 'string' ||
+                typeof req.body.duration !== 'number' ||
+                typeof req.body.warningSeverity !== 'string' ||
+                typeof req.body.action !== 'string'
+            ) {
+                res.status(400).send({ error: 'Data types do not match.' });
+                return;
+            }
+
+            const success = await services.dbService.guild(req.params.guildId).removePunishment(req.body);
+            if(!success) res.status(500).send({ error: 'Database error.' });
+            else res.status(200).send({ message: 'Success' });
+        } catch(err) {
+            res.status(500).send({ error: `${err}` });
+        }
+    });
+
     return guildsRouter;
 };
