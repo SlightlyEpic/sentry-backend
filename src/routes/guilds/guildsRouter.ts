@@ -4,6 +4,7 @@ import { Request, Router } from 'express';
 import { isSignedIn } from '@/middlewares/isSignedIn';
 import { ensurePermissions } from '@/middlewares/ensurePermissions';
 import validator from 'validator';
+import { Punishment } from '@/types/db';
 
 export default (services: Services): Router => {
     const guildsRouter = Router();
@@ -20,6 +21,8 @@ export default (services: Services): Router => {
         res.send({ message: 'success', data: mutualGuilds });
     });
 
+    type GuildPathParams = { guildId: string };
+
     guildsRouter.get('/:guildId/', async (req, res) => {
         try {
             const data = await services.dbService.guild(req.params.guildId).allSettings();
@@ -29,7 +32,7 @@ export default (services: Services): Router => {
         }
     });
 
-    interface SetPrefixRequest extends Request<{ guildId: string }, any, { prefix: string }> {}
+    interface SetPrefixRequest extends Request<GuildPathParams, any, { prefix: string }> {}
     const hasWhitespace = new RegExp(/\\s+/gm);
     guildsRouter.post('/:guildId/prefix/', async (req: SetPrefixRequest, res) => {
         try {
@@ -51,7 +54,27 @@ export default (services: Services): Router => {
         }
     });
 
-    // guildsRouter.post('/:guildId/');
+    interface AddPunishmentRequest extends Request<GuildPathParams, any, Punishment> {}
+    guildsRouter.post('/:guildId/punishments/add', async (req: AddPunishmentRequest, res) => {
+        try {
+            if(
+                typeof req.body.warningsCount !== 'number' ||
+                typeof req.body.duration_raw !== 'string' ||
+                typeof req.body.duration !== 'number' ||
+                typeof req.body.warningSeverity !== 'string' ||
+                typeof req.body.action !== 'string'
+            ) {
+                res.status(400).send({ error: 'Data types do not match.' });
+                return;
+            }
+
+            const success = await services.dbService.guild(req.params.guildId).addPunishment(req.body);
+            if(!success) res.status(500).send({ error: 'Database error.' });
+            else res.status(200).send({ message: 'Success' });
+        } catch(err) {
+            res.status(500).send({ error: `${err}` });
+        }
+    });
 
     return guildsRouter;
 };

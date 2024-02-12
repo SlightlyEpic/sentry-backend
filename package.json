@@ -6,9 +6,11 @@
   "scripts": {
     "start": "node dist/index.js",
     "dev": "nodemon --watch .env --watch src src/index.ts",
-    "build": "tsc",
+    "build": "tsc && pnpm postbuild",
+    "postbuild": "pnpm gen-ajv-schema && copyfiles --flat src/ajvSchema/*.json dist/ajvSchema",
     "lint": "eslint src --fix",
-    "secretgen": "openssl rand -base64 16"
+    "secretgen": "openssl rand -base64 16",
+    "gen-ajv-schema": "ts-json-schema-generator --path \"src/types/db.ts\" --out \"src/ajvSchema/db.json\" --type \"*\" --tsconfig \"tsconfig.json\""
   },
   "keywords": [],
   "author": "",
@@ -22,8 +24,10 @@
     "@types/passport-discord": "^0.1.11",
     "@types/validator": "^13.11.9",
     "@typescript-eslint/eslint-plugin": "^6.19.0",
+    "copyfiles": "^2.4.1",
     "eslint": "^8.56.0",
     "nodemon": "^3.0.3",
+    "ts-json-schema-generator": "^1.5.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.3.3"
   },

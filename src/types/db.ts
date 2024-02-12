@@ -1,5 +1,5 @@
 import type { APIEmbed } from 'discord.js';
-import { ObjectId } from 'mongodb';
+import { Long } from 'mongodb';
 
 // This file wont be used for now
 
@@ -47,7 +47,7 @@ export type Menu = {
 }
 
 export type Punishment = {
-    warningsCount: string
+    warningsCount: number
     duration_raw: string
     duration: number
     warningSeverity: string
@@ -148,7 +148,7 @@ export type Application = {
 }
 
 export type Guild = {
-    _id: ObjectId
+    _id: Long
     prefix: string
     custom_permits: Permit[]
     premium: Premium
