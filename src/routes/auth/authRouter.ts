@@ -11,20 +11,20 @@ export default (services: Services): Router => {
     });
 
     authRouter.get('/discord/redirect', passport.authenticate('discord'), (req, res) => {
-        res.send({ msg: 'Success' });
+        res.send({ message: 'Success' });
     });
 
     authRouter.get('/', (req, res) => {
         const user = req.user as PassportUser;
 
         if(user) res.send(user);
-        else res.status(401).send({ msg: 'Unauthorized' });
+        else res.status(401).send({ message: 'Unauthorized' });
     });
 
     authRouter.get('/mutual', async (req, res) => {
         const user = req.user as PassportUser;
 
-        if(!user) res.status(401).send({ msg: 'Unauthorized' });
+        if(!user) res.status(401).send({ message: 'Unauthorized' });
 
         let userGuilds = services.userGuildsService.addUser(user.id, user.accessToken, user.refreshToken);
         let guilds = await userGuilds?.getMutualGuilds({ skipCache: true });
