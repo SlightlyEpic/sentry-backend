@@ -16,7 +16,7 @@ export type Message = {
     buttons: string[]           // this is just a list of custom button unique ids, the user would select from a menu of existing custom buttons from the database
 }
 
-type Action = {
+export type Action = {
     name: string
     template_name: string
 }

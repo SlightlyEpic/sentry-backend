@@ -4,7 +4,12 @@ import { Request, Router } from 'express';
 import { isSignedIn } from '@/middlewares/isSignedIn';
 import { ensurePermissions } from '@/middlewares/ensurePermissions';
 import validator from 'validator';
-import { Punishment } from '@/types/db';
+import { definitions as ajvSchema } from '@/ajvSchema/guildRoutes.json';
+import { validateBody } from '@/middlewares/validateBody';
+import * as GR from '@/types/payloads/guildRoutes';
+
+type GuildPathParms = { guildId: string };
+interface ReqWithBody<T> extends Request<GuildPathParms, any, T> {}
 
 export default (services: Services): Router => {
     const guildsRouter = Router();
@@ -21,8 +26,6 @@ export default (services: Services): Router => {
         res.send({ message: 'success', data: mutualGuilds });
     });
 
-    type GuildPathParams = { guildId: string };
-
     guildsRouter.get('/:guildId/', async (req, res) => {
         try {
             const data = await services.dbService.guild(req.params.guildId).allSettings();
@@ -32,9 +35,8 @@ export default (services: Services): Router => {
         }
     });
 
-    interface SetPrefixRequest extends Request<GuildPathParams, any, { prefix: string }> {}
-    const hasWhitespace = new RegExp(/\\s+/gm);
-    guildsRouter.post('/:guildId/prefix/', async (req: SetPrefixRequest, res) => {
+    const hasWhitespace = new RegExp(/\s/gm);
+    guildsRouter.post('/:guildId/prefix/', validateBody(ajvSchema.SetPrefixPayload), async (req: ReqWithBody<GR.SetPrefixPayload>, res) => {
         try {
             const pfx = req.body.prefix;
             if(
@@ -54,20 +56,8 @@ export default (services: Services): Router => {
         }
     });
 
-    interface AddPunishmentRequest extends Request<GuildPathParams, any, Punishment> {}
-    guildsRouter.post('/:guildId/punishments/add', async (req: AddPunishmentRequest, res) => {
+    guildsRouter.post('/:guildId/punishments/add', validateBody(ajvSchema.AddPunishmentPayload), async (req: ReqWithBody<GR.AddPunishmentPayload>, res) => {
         try {
-            if(
-                typeof req.body.warningsCount !== 'number' ||
-                typeof req.body.duration_raw !== 'string' ||
-                typeof req.body.duration !== 'number' ||
-                typeof req.body.warningSeverity !== 'string' ||
-                typeof req.body.action !== 'string'
-            ) {
-                res.status(400).send({ error: 'Data types do not match.' });
-                return;
-            }
-
             const success = await services.dbService.guild(req.params.guildId).addPunishment(req.body);
             if(!success) res.status(500).send({ error: 'Database error.' });
             else res.status(200).send({ message: 'Success' });
@@ -76,21 +66,29 @@ export default (services: Services): Router => {
         }
     });
 
-    interface RemovePunishmentRequest extends Request<GuildPathParams, any, Punishment> {}
-    guildsRouter.post('/:guildId/punishments/remove', async (req: RemovePunishmentRequest, res) => {
+    guildsRouter.post('/:guildId/punishments/remove', validateBody(ajvSchema.RemovePunishmentPayload), async (req: ReqWithBody<GR.RemovePunishmentPayload>, res) => {
         try {
-            if(
-                typeof req.body.warningsCount !== 'number' ||
-                typeof req.body.duration_raw !== 'string' ||
-                typeof req.body.duration !== 'number' ||
-                typeof req.body.warningSeverity !== 'string' ||
-                typeof req.body.action !== 'string'
-            ) {
-                res.status(400).send({ error: 'Data types do not match.' });
-                return;
-            }
-
             const success = await services.dbService.guild(req.params.guildId).removePunishment(req.body);
+            if(!success) res.status(500).send({ error: 'Database error.' });
+            else res.status(200).send({ message: 'Success' });
+        } catch(err) {
+            res.status(500).send({ error: `${err}` });
+        }
+    });
+
+    guildsRouter.post('/:guildId/permits/add', validateBody(ajvSchema.AddPermitPayload), async (req: ReqWithBody<GR.AddPermitPayload>, res) => {
+        try {
+            const success = await services.dbService.guild(req.params.guildId).addPermit(req.body);
+            if(!success) res.status(500).send({ error: 'Database error.' });
+            else res.status(200).send({ message: 'Success' });
+        } catch(err) {
+            res.status(500).send({ error: `${err}` });
+        }
+    });
+
+    guildsRouter.post('/:guildId/permits/remove', validateBody(ajvSchema.RemovePermitPayload), async (req: ReqWithBody<GR.RemovePermitPayload>, res) => {
+        try {
+            const success = await services.dbService.guild(req.params.guildId).removePermit(req.body.permitName);
             if(!success) res.status(500).send({ error: 'Database error.' });
             else res.status(200).send({ message: 'Success' });
         } catch(err) {

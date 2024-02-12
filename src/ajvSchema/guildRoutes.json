@@ -1,0 +1,103 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "AddPermitPayload": {
+      "$ref": "#/definitions/Permit"
+    },
+    "AddPunishmentPayload": {
+      "$ref": "#/definitions/Punishment"
+    },
+    "Permit": {
+      "additionalProperties": false,
+      "properties": {
+        "locked": {
+          "type": "boolean"
+        },
+        "name": {
+          "type": "string"
+        },
+        "permissions": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "roles": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "users": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "name",
+        "locked",
+        "permissions",
+        "roles",
+        "users"
+      ],
+      "type": "object"
+    },
+    "Punishment": {
+      "additionalProperties": false,
+      "properties": {
+        "action": {
+          "type": "string"
+        },
+        "duration": {
+          "type": "number"
+        },
+        "duration_raw": {
+          "type": "string"
+        },
+        "warningSeverity": {
+          "type": "string"
+        },
+        "warningsCount": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "warningsCount",
+        "duration_raw",
+        "duration",
+        "warningSeverity",
+        "action"
+      ],
+      "type": "object"
+    },
+    "RemovePermitPayload": {
+      "additionalProperties": false,
+      "properties": {
+        "permitName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "permitName"
+      ],
+      "type": "object"
+    },
+    "RemovePunishmentPayload": {
+      "$ref": "#/definitions/Punishment"
+    },
+    "SetPrefixPayload": {
+      "additionalProperties": false,
+      "properties": {
+        "prefix": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "prefix"
+      ],
+      "type": "object"
+    }
+  }
+}

@@ -1,3 +1,4 @@
+import 'module-alias/register';
 import 'dotenv/config';
 import { openKv } from '@deno/kv';
 import { MongoClient } from 'mongodb';

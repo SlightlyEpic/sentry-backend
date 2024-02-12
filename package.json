@@ -4,17 +4,20 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node dist/index.js",
+    "start": "node dist/src/index.js",
     "dev": "nodemon --watch .env --watch src src/index.ts",
     "build": "tsc && pnpm postbuild",
     "postbuild": "pnpm gen-ajv-schema && copyfiles --flat src/ajvSchema/*.json dist/ajvSchema",
     "lint": "eslint src --fix",
     "secretgen": "openssl rand -base64 16",
-    "gen-ajv-schema": "ts-json-schema-generator --path \"src/types/db.ts\" --out \"src/ajvSchema/db.json\" --type \"*\" --tsconfig \"tsconfig.json\""
+    "gen-ajv-schema": "ts-json-schema-generator --path \"src/types/payloads/guildRoutes.ts\" --out \"src/ajvSchema/guildRoutes.json\" --tsconfig \"tsconfig.json\""
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "_moduleAliases": {
+    "@": "./dist/src"
+  },
   "devDependencies": {
     "@types/cors": "^2.8.17",
     "@types/express": "^4.17.21",
@@ -34,6 +37,7 @@
   "dependencies": {
     "@deno/kv": "^0.7.0",
     "@isaacs/ttlcache": "^1.4.1",
+    "ajv": "^8.12.0",
     "cors": "^2.8.5",
     "discord-oauth2": "^2.12.0",
     "discord.js": "^14.14.1",
@@ -42,6 +46,7 @@
     "express-rate-limit": "^7.1.5",
     "express-session": "^1.17.3",
     "express-session-sqlite": "^2.1.1",
+    "module-alias": "^2.2.3",
     "mongodb": "^6.3.0",
     "passport": "^0.7.0",
     "passport-discord": "^0.1.4",
