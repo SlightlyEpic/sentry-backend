@@ -10,7 +10,7 @@
     "postbuild": "pnpm gen-ajv-schema && copyfiles --flat src/ajvSchema/*.json dist/ajvSchema",
     "lint": "eslint src --fix",
     "secretgen": "openssl rand -base64 16",
-    "gen-ajv-schema": "ts-json-schema-generator --path \"src/types/payloads/guildRoutes.ts\" --out \"src/ajvSchema/guildRoutes.json\" --tsconfig \"tsconfig.json\""
+    "gen-ajv-schema": "ts-json-schema-generator --path \"src/types/payloads/guildRoutes.ts\" --out \"src/ajvSchema/guildRoutes.json\" --tsconfig \"tsconfig.json\" && node util/deref.js"
   },
   "keywords": [],
   "author": "",
@@ -35,6 +35,7 @@
     "typescript": "^5.3.3"
   },
   "dependencies": {
+    "@apidevtools/json-schema-ref-parser": "^11.1.0",
     "@deno/kv": "^0.7.0",
     "@isaacs/ttlcache": "^1.4.1",
     "ajv": "^8.12.0",
