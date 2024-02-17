@@ -304,7 +304,7 @@ export class GuildManager {
         type returnType = Pick<Guild,
             'adwarning_settings' | 'mod_stats' | 'compact_responses' | 
             'prefix' | 'custom_permits' | 'warn_punishments' |
-            'reports' | 'templates' | 'premium'
+            'templates' | 'premium'
         >;
 
         return this.collection.findOne<returnType>(this.filter, {
@@ -315,7 +315,6 @@ export class GuildManager {
                 'prefix': 1,
                 'custom_permits': 1,
                 'warn_punishments': 1,
-                'reports': 1,
                 'templates': 1,
                 'premium': 1
             }
