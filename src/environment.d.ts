@@ -3,6 +3,7 @@ declare global {
         interface ProcessEnv {
             PORT: number
             ORIGIN: string
+            VITE_ORIGIN: string
             NODE_ENV: 'development' | 'production'
             S_SECRET: string
             DISCORD_CLIENT_ID: string

@@ -50,6 +50,10 @@ export class UserGuildsService {
     removeUser(userId: string): boolean {
         return this.users.delete(userId);
     }
+
+    getDiscordUser(accessToken: string) {
+        return this.oauth.getUser(accessToken);
+    }
 }
 
 export class UserGuildManager {

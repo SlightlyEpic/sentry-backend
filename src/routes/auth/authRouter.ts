@@ -11,14 +11,29 @@ export default (services: Services): Router => {
     });
 
     authRouter.get('/discord/redirect', passport.authenticate('discord'), (req, res) => {
-        res.send({ message: 'Success' });
+        if(process.env.NODE_ENV === 'development') res.redirect(`${process.env.VITE_ORIGIN}/login`);
+        else res.redirect(`${process.env.ORIGIN}/login`);
     });
 
-    authRouter.get('/', (req, res) => {
+    authRouter.get('/', async (req, res) => {
         const user = req.user as PassportUser;
+        const discordUser = await services.userGuildsService.getDiscordUser(user.accessToken);
 
-        if(user) res.send(user);
-        else res.status(401).send({ message: 'Unauthorized' });
+        if(user) {
+            res.send({
+                username: discordUser.username,
+                image: `https://cdn.discordapp.com/avatars/${discordUser.id}/${discordUser.avatar}`
+            });
+        } else {
+            res.status(401).send({ message: 'Unauthorized' });
+        }
+    });
+
+    authRouter.get('/logout', async     (req, res) => {
+        req.logout((err) => {
+            if(err) res.status(500).send({ error: `${err}` });
+            else res.send({ message: 'Success.' });
+        });
     });
 
     authRouter.get('/mutual', async (req, res) => {
