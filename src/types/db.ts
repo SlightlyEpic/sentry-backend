@@ -1,8 +1,6 @@
 import type { APIEmbed } from 'discord.js';
 import { Long } from 'mongodb';
 
-// This file wont be used for now
-
 // Some fields are camel case because these are schema types
 // of an existing database
 
