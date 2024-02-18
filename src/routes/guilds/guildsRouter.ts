@@ -18,12 +18,16 @@ export default (services: Services): Router => {
     guildsRouter.use(ensurePermissions(services));
 
     guildsRouter.get('/mutual', async (req, res) => {
-        let user = req.user as PassportUser;
+        try {
+            let user = req.user as PassportUser;
 
-        let serviceUser = services.userGuildsService.getUser(user.id, user.accessToken, user.refreshToken);
-        let mutualGuilds = await serviceUser.getMutualGuilds({ skipCache: req.query.force === '1' });
+            let serviceUser = services.userGuildsService.getUser(user.id, user.accessToken, user.refreshToken);
+            let mutualGuilds = await serviceUser.getMutualGuilds({ skipCache: req.query.force === '1' });
 
-        res.send({ message: 'success', data: mutualGuilds });
+            res.send({ message: 'success', data: mutualGuilds });
+        } catch(err) {
+            res.status(500).send({ error: `${err}` });
+        }
     });
 
     guildsRouter.get('/:guildId/', async (req, res) => {
