@@ -13,7 +13,10 @@ export class GuildManager {
     }
 
     async data(): Promise<Guild | null> {
-        return this.collection.findOne(this.filter);
+        const data = await this.collection.findOne(this.filter);
+        // @ts-expect-error Because the guy decided to have "enabled"/"disabled" in the status field
+        if(data) data.mod_stats.status = data.mod_stats.status === 'enabled';
+        return data;
     }
 
     /***************************************************
@@ -38,7 +41,31 @@ export class GuildManager {
         };
 
         const result = await this.collection.updateOne(this.filter, query);
-        if(result.modifiedCount) return true;
+        if(result.matchedCount) return true;
+        else return false;
+    }
+
+    async setModStatsStatus(status: boolean) {
+        const query: UpdateFilter<Guild> = {
+            $set: {
+                'mod_stats.status': status ? 'enabled' : 'disabled'     // Because that guy decided to use enabled/disabled for this :|
+            }
+        };
+
+        const result = await this.collection.updateOne(this.filter, query);
+        if(result.matchedCount) return true;
+        else return false;
+    }
+
+    async setCompactResponse(status: boolean) {
+        const query: UpdateFilter<Guild> = {
+            $set: {
+                'compact_responses': status
+            }
+        };
+
+        const result = await this.collection.updateOne(this.filter, query);
+        if(result.matchedCount) return true;
         else return false;
     }
 
@@ -64,7 +91,7 @@ export class GuildManager {
         };
 
         const result = await this.collection.updateOne(this.filter, query);
-        if(result.modifiedCount) return true;
+        if(result.matchedCount) return true;
         else return false;
     }
 
@@ -78,7 +105,7 @@ export class GuildManager {
         };
 
         const result = await this.collection.updateOne(this.filter, query);
-        if(result.modifiedCount) return true;
+        if(result.matchedCount) return true;
         else return false;
     }
 
@@ -104,7 +131,7 @@ export class GuildManager {
         };
 
         const result = await this.collection.updateOne(this.filter, query);
-        if(result.modifiedCount) return true;
+        if(result.matchedCount) return true;
         else return false;
     }
 
@@ -118,7 +145,7 @@ export class GuildManager {
         };
 
         const result = await this.collection.updateOne(this.filter, query);
-        if(result.modifiedCount) return true;
+        if(result.matchedCount) return true;
         else return false;
     }
 
@@ -198,7 +225,7 @@ export class GuildManager {
         };
 
         const result = await this.collection.updateOne(this.filter, query);
-        if(result.modifiedCount) return true;
+        if(result.matchedCount) return true;
         else return false;
     }
 
@@ -210,7 +237,7 @@ export class GuildManager {
         };
 
         const result = await this.collection.updateOne(this.filter, query);
-        if(result.modifiedCount) return true;
+        if(result.matchedCount) return true;
         else return false;
     }
 
@@ -222,7 +249,7 @@ export class GuildManager {
         };
 
         const result = await this.collection.updateOne(this.filter, query);
-        if(result.modifiedCount) return true;
+        if(result.matchedCount) return true;
         else return false;
     }
 
@@ -234,7 +261,7 @@ export class GuildManager {
         };
 
         const result = await this.collection.updateOne(this.filter, query);
-        if(result.modifiedCount) return true;
+        if(result.matchedCount) return true;
         else return false;
     }
 
@@ -260,7 +287,7 @@ export class GuildManager {
         };
 
         const result = await this.collection.updateOne(this.filter, query);
-        if(result.modifiedCount) return true;
+        if(result.matchedCount) return true;
         else return false;
     }
 
@@ -272,7 +299,7 @@ export class GuildManager {
         };
 
         const result = await this.collection.updateOne(this.filter, query);
-        if(result.modifiedCount) return true;
+        if(result.matchedCount) return true;
         else return false;
     }
 
@@ -300,14 +327,14 @@ export class GuildManager {
         });
     }
 
-    allSettings() {
+    async allSettings() {
         type returnType = Pick<Guild,
             'adwarning_settings' | 'mod_stats' | 'compact_responses' | 
             'prefix' | 'custom_permits' | 'warn_punishments' |
             'templates' | 'premium' | 'reports'
         >;
 
-        return this.collection.findOne<returnType>(this.filter, {
+        const data = await this.collection.findOne<returnType>(this.filter, {
             projection: {
                 'adwarning_settings': 1,
                 'mod_stats': 1,
@@ -320,5 +347,10 @@ export class GuildManager {
                 'reports': 1
             }
         });
+
+        // @ts-expect-error Because the guy decided to have "enabled"/"disabled" in the status field
+        if(data) data.mod_stats.status = data.mod_stats.status === 'enabled';
+
+        return data;
     }
 }

@@ -1,6 +1,8 @@
 import { Message, Permit, Punishment } from '../db';
 
 export type SetPrefixPayload = { prefix: string };
+export type SetModStatsStatusPayload = { status: boolean };
+export type SetCompactResponsePayload = { status: boolean };
 
 export type AddPunishmentPayload = Punishment;
 export type RemovePunishmentPayload = Punishment;

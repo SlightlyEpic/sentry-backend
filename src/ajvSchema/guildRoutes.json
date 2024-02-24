@@ -417,18 +417,18 @@
         "duration_raw": {
           "type": "string"
         },
-        "warningSeverity": {
+        "warning_severity": {
           "type": "string"
         },
-        "warningsCount": {
+        "warnings_count": {
           "type": "number"
         }
       },
       "required": [
-        "warningsCount",
+        "warnings_count",
         "duration_raw",
         "duration",
-        "warningSeverity",
+        "warning_severity",
         "action"
       ],
       "type": "object"
@@ -741,18 +741,18 @@
         "duration_raw": {
           "type": "string"
         },
-        "warningSeverity": {
+        "warning_severity": {
           "type": "string"
         },
-        "warningsCount": {
+        "warnings_count": {
           "type": "number"
         }
       },
       "required": [
-        "warningsCount",
+        "warnings_count",
         "duration_raw",
         "duration",
-        "warningSeverity",
+        "warning_severity",
         "action"
       ],
       "type": "object"
@@ -781,18 +781,18 @@
         "duration_raw": {
           "type": "string"
         },
-        "warningSeverity": {
+        "warning_severity": {
           "type": "string"
         },
-        "warningsCount": {
+        "warnings_count": {
           "type": "number"
         }
       },
       "required": [
-        "warningsCount",
+        "warnings_count",
         "duration_raw",
         "duration",
-        "warningSeverity",
+        "warning_severity",
         "action"
       ],
       "type": "object"
@@ -1076,6 +1076,30 @@
       "type": "object"
     },
     "SetAdwarnStatusPayload": {
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "status"
+      ],
+      "type": "object"
+    },
+    "SetCompactResponsePayload": {
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "status"
+      ],
+      "type": "object"
+    },
+    "SetModStatsStatusPayload": {
       "additionalProperties": false,
       "properties": {
         "status": {

@@ -45,17 +45,29 @@ export type Menu = {
 }
 
 export type Punishment = {
-    warningsCount: number
+    warnings_count: number
     duration_raw: string
     duration: number
-    warningSeverity: string
+    warning_severity: string
     action: string
 }
+
+export type PermissionFlags = 'MANAGE_CASES'
+                            | 'MANAGE_LOCKDOWN'
+                            | 'MANAGE_APPEALS'
+                            | 'MANAGE_SLOWMODE'
+                            | 'MANAGE_MODMAIL_THREADS'
+                            | 'MANAGE_APPLICATION_RESPONSES'
+                            | 'WARN_MEMBERS'
+                            | 'KICK_MEMBERS'
+                            | 'BAN_MEMBERS'
+                            | 'MUTE_MEMBERS'
+                            | 'MANAGE_APPEALS'
 
 export type Permit = {
     name: string
     locked: boolean
-    permissions: string[]
+    permissions: PermissionFlags[]
     roles: string[]             // Role Ids
     users: string[]             // User Ids
 }

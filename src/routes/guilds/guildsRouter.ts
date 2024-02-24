@@ -33,7 +33,8 @@ export default (services: Services): Router => {
     guildsRouter.get('/:guildId/', async (req, res) => {
         try {
             const data = await services.dbService.guild(req.params.guildId).allSettings();
-            res.send({ message: 'success', data: data });
+            if(!data) res.status(400).send({ error: 'Guild not found' });
+            else res.send({ message: 'success', data: data });
         } catch(err) {
             res.status(500).send({ error: `${err}` });
         }
@@ -75,6 +76,26 @@ export default (services: Services): Router => {
             }
 
             const success = await services.dbService.guild(req.params.guildId).setPrefix(pfx);
+            if(!success) res.status(500).send({ error: 'Database error.' });
+            else res.status(200).send({ message: 'Success' });
+        } catch(err) {
+            res.status(500).send({ error: `${err}` });
+        }
+    });
+
+    guildsRouter.post('/:guildId/modstats/status', validateBody(ajvSchema.SetModStatsStatusPayload), async (req: ReqWithBody<GR.SetModStatsStatusPayload>, res) => {
+        try {
+            const success = await services.dbService.guild(req.params.guildId).setModStatsStatus(req.body.status);
+            if(!success) res.status(500).send({ error: 'Database error.' });
+            else res.status(200).send({ message: 'Success' });
+        } catch(err) {
+            res.status(500).send({ error: `${err}` });
+        }
+    });
+
+    guildsRouter.post('/:guildId/compactResponse', validateBody(ajvSchema.SetCompactResponsePayload), async (req: ReqWithBody<GR.SetCompactResponsePayload>, res) => {
+        try {
+            const success = await services.dbService.guild(req.params.guildId).setCompactResponse(req.body.status);
             if(!success) res.status(500).send({ error: 'Database error.' });
             else res.status(200).send({ message: 'Success' });
         } catch(err) {
