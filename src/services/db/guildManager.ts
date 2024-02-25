@@ -1,6 +1,16 @@
 import { Guild, Message, Permit, Punishment } from '@/types/db';
 import { Collection, Filter, Long, UpdateFilter } from 'mongodb';
 
+// ! IMPORTANT
+// All Long values are sent as is from here
+// They are stringified using JSON.stringify() by express,
+// A .toJSON() method is added to Long's prototype in index.js
+// Which makes the stringification return a string instead of { high: number, low: number, unsigned: boolean }
+// When recieiving data for setters, it will convert all values that should be Long back into a Long
+// Because they are recieved as strings (what they should have been smh)
+// So anywhere you see x = x.map(v => new Long(v)) as unknown as string[]
+// It is because IDs are stored as Longs in the db but sent as strings to the frontend
+
 export class GuildManager {
     guildId: string;
     collection: Collection<Guild>;
@@ -130,6 +140,9 @@ export class GuildManager {
             }
         };
 
+        permit.roles = permit.roles.map(p => new Long(p)) as unknown as string[];
+        permit.users = permit.users.map(u => new Long(u)) as unknown as string[];
+
         const result = await this.collection.updateOne(this.filter, query);
         if(result.matchedCount) return true;
         else return false;
@@ -177,6 +190,8 @@ export class GuildManager {
     }
 
     async setRoles(permitName: string, roles: string[]) {
+        roles = roles.map(r => new Long(r)) as unknown as string[];
+
         const aggResult = await this.collection.aggregate<{ permitIndex: number }>([
             {
                 $match: this.filter
@@ -230,6 +245,8 @@ export class GuildManager {
     }
 
     async setAdwarnChannel(channel: string) {
+        channel = new Long(channel) as unknown as string;
+
         const query: UpdateFilter<Guild> = {
             $set: {
                 'adwarning_settings.channel': channel
@@ -292,6 +309,8 @@ export class GuildManager {
     }
 
     async setReportsChannel(channel: string) {
+        channel = new Long(channel) as unknown as string;
+
         const query: UpdateFilter<Guild> = {
             $set: {
                 'reports.channel': channel

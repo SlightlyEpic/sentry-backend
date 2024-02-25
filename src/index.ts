@@ -7,6 +7,14 @@ import { createApp } from './app';
 import { BotService } from './services/bot';
 import { UserGuildsService } from './services/guilds';
 import { DbService } from './services/db/db';
+import { Long } from 'mongodb';
+
+// ! QOL HACK
+// See services/db/guildManager.ts for a detailed explanation
+// @ts-expect-error Adding a toJSON method to properly stringify the thing instead of converting to "{ high: number, low: number, unsigned: boolean }"
+Long.prototype.toJSON = function(this: Long) {
+    return this.toString();
+};
 
 const PORT = process.env.PORT || 3001;
 
