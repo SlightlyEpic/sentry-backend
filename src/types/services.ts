@@ -7,3 +7,9 @@ export type Services = {
     userGuildsService: UserGuildsService,
     dbService: DbService
 }
+
+export type CompactRole = {
+    id: string
+    name: string
+    color: number
+}

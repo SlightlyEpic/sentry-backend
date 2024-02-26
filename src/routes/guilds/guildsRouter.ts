@@ -32,9 +32,20 @@ export default (services: Services): Router => {
 
     guildsRouter.get('/:guildId/', async (req, res) => {
         try {
-            const data = await services.dbService.guild(req.params.guildId).allSettings();
-            if(!data) res.status(400).send({ error: 'Guild not found' });
-            else res.send({ message: 'success', data: data });
+            const allSettings = await services.dbService.guild(req.params.guildId).allSettings();
+            const roleObj = services.botService.getAllRoles(req.params.guildId);
+            
+            if(!allSettings || !roleObj) {
+                res.status(400).send({ error: 'Guild not found' });
+                return;
+            }
+
+            const data = {
+                ...allSettings,
+                roles: roleObj
+            };
+
+            res.send({ message: 'success', data: data });
         } catch(err) {
             res.status(500).send({ error: `${err}` });
         }

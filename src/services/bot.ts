@@ -1,4 +1,5 @@
 import Discord, { GatewayIntentBits } from 'discord.js';
+import type { CompactRole } from '@/types/services';
 
 export class BotService {
     private client: Discord.Client;
@@ -23,6 +24,13 @@ export class BotService {
 
     getGuilds() {
         return this.client.guilds.cache;
+    }
+
+    getAllRoles(guildId: string): { [key: string]: CompactRole } | null {
+        const guild = this.client.guilds.cache.get(guildId);
+        return guild ? Object.fromEntries(guild.roles.cache.mapValues((r): CompactRole => {
+            return { id: r.id, name: r.name, color: r.color };
+        })) : null;
     }
 
     destroy() {
