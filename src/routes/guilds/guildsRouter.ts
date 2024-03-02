@@ -172,7 +172,7 @@ export default (services: Services): Router => {
         }
     });
 
-    guildsRouter.post('/:guildId/permits/roles/', validateBody(ajvSchema.SetPermissionsPayload), async (req: ReqWithBody<GR.SetRolesPayload>, res) => {
+    guildsRouter.post('/:guildId/permits/roles/', validateBody(ajvSchema.SetRolesPayload), async (req: ReqWithBody<GR.SetRolesPayload>, res) => {
         try {
             const success = await services.dbService.guild(req.params.guildId).setRoles(req.body.permitName, req.body.roles);
             if(!success) res.status(500).send({ error: 'Database error.' });

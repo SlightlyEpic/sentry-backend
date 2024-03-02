@@ -180,7 +180,7 @@ export class GuildManager {
 
         const query: UpdateFilter<Guild> = {
             $set: {
-                [`custom_permits.permissions.${aggResult[0].permitIndex}`]: permissions
+                [`custom_permits.${aggResult[0].permitIndex}.permissions`]: permissions
             }
         };
 
@@ -209,7 +209,7 @@ export class GuildManager {
 
         const query: UpdateFilter<Guild> = {
             $set: {
-                [`custom_permits.roles.${aggResult[0].permitIndex}`]: roles
+                [`custom_permits.${aggResult[0].permitIndex}.roles`]: roles
             }
         };
 
@@ -321,6 +321,28 @@ export class GuildManager {
         if(result.matchedCount) return true;
         else return false;
     }
+
+    /***************************************************
+     **************** Template settings ****************
+     ***************************************************/
+    
+    async setMessageTemplate(template: Message) {
+        const filter = {
+            ...this.filter,
+            'templates.messages.id': template.id
+        };
+
+        const query: UpdateFilter<Guild> = {
+            $set: {
+                'templates.messages.$': template
+            }
+        };
+
+        const result = await this.collection.updateOne(filter, query);
+        if(result.matchedCount) return true;
+        else return false;
+    }
+
 
     /***************************************************
      ****************** Other getters ******************
