@@ -17,10 +17,11 @@ export function createApp(services: Services) {
     app.use(express.json());
 
     // cors
-    app.use(cors({
-        origin: [process.env.ORIGIN],
-        credentials: true,
-    }));
+    // app.use(cors({
+    //     origin: [process.env.ORIGIN],
+    //     credentials: true,
+    // }));
+    app.use(cors());
 
     // express-session
     app.use(session({
