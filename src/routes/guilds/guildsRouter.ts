@@ -250,5 +250,19 @@ export default (services: Services): Router => {
         }
     });
 
+    /*****************************************************
+     * Template settings routes
+     *****************************************************/
+
+    guildsRouter.post('/:guildId/templates/update', validateBody(ajvSchema.SetMessageTemplatePayload), async (req: ReqWithBody<GR.SetMessageTemplatePayload>, res) => {
+        try {
+            const success = await services.dbService.guild(req.params.guildId).setMessageTemplate(req.body);
+            if(!success) res.status(500).send({ error: 'Database error.' });
+            else res.status(200).send({ message: 'Success' });
+        } catch(err) {
+            res.status(500).send({ error: `${err}` });
+        }
+    });
+
     return guildsRouter;
 };

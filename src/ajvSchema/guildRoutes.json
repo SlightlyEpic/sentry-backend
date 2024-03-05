@@ -379,6 +379,18 @@
         },
         "permissions": {
           "items": {
+            "enum": [
+              "MANAGE_CASES",
+              "MANAGE_LOCKDOWN",
+              "MANAGE_APPEALS",
+              "MANAGE_SLOWMODE",
+              "MANAGE_MODMAIL_THREADS",
+              "MANAGE_APPLICATION_RESPONSES",
+              "WARN_MEMBERS",
+              "KICK_MEMBERS",
+              "BAN_MEMBERS",
+              "MUTE_MEMBERS"
+            ],
             "type": "string"
           },
           "type": "array"
@@ -692,6 +704,21 @@
       ],
       "type": "object"
     },
+    "PermissionFlags": {
+      "enum": [
+        "MANAGE_CASES",
+        "MANAGE_LOCKDOWN",
+        "MANAGE_APPEALS",
+        "MANAGE_SLOWMODE",
+        "MANAGE_MODMAIL_THREADS",
+        "MANAGE_APPLICATION_RESPONSES",
+        "WARN_MEMBERS",
+        "KICK_MEMBERS",
+        "BAN_MEMBERS",
+        "MUTE_MEMBERS"
+      ],
+      "type": "string"
+    },
     "Permit": {
       "additionalProperties": false,
       "properties": {
@@ -703,6 +730,18 @@
         },
         "permissions": {
           "items": {
+            "enum": [
+              "MANAGE_CASES",
+              "MANAGE_LOCKDOWN",
+              "MANAGE_APPEALS",
+              "MANAGE_SLOWMODE",
+              "MANAGE_MODMAIL_THREADS",
+              "MANAGE_APPLICATION_RESPONSES",
+              "WARN_MEMBERS",
+              "KICK_MEMBERS",
+              "BAN_MEMBERS",
+              "MUTE_MEMBERS"
+            ],
             "type": "string"
           },
           "type": "array"
@@ -1096,6 +1135,251 @@
       },
       "required": [
         "status"
+      ],
+      "type": "object"
+    },
+    "SetMessageTemplatePayload": {
+      "additionalProperties": false,
+      "properties": {
+        "attachments": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "buttons": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "content": {
+          "type": "string"
+        },
+        "embed": {
+          "additionalProperties": false,
+          "description": "https://discord.com/developers/docs/resources/channel#embed-object-embed-structure\n\nLength limit: 6000 characters",
+          "properties": {
+            "author": {
+              "description": "Author information\n\nSee https://discord.com/developers/docs/resources/channel#embed-object-embed-author-structure",
+              "additionalProperties": false,
+              "properties": {
+                "icon_url": {
+                  "description": "URL of author icon (only supports http(s) and attachments)",
+                  "type": "string"
+                },
+                "name": {
+                  "description": "Name of author\n\nLength limit: 256 characters",
+                  "type": "string"
+                },
+                "proxy_icon_url": {
+                  "description": "A proxied url of author icon",
+                  "type": "string"
+                },
+                "url": {
+                  "description": "URL of author",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "name"
+              ],
+              "type": "object"
+            },
+            "color": {
+              "description": "Color code of the embed",
+              "type": "number"
+            },
+            "description": {
+              "description": "Description of embed\n\nLength limit: 4096 characters",
+              "type": "string"
+            },
+            "fields": {
+              "description": "Fields information\n\nLength limit: 25 field objects\n\nSee https://discord.com/developers/docs/resources/channel#embed-object-embed-field-structure",
+              "items": {
+                "additionalProperties": false,
+                "description": "https://discord.com/developers/docs/resources/channel#embed-object-embed-field-structure",
+                "properties": {
+                  "inline": {
+                    "description": "Whether or not this field should display inline",
+                    "type": "boolean"
+                  },
+                  "name": {
+                    "description": "Name of the field\n\nLength limit: 256 characters",
+                    "type": "string"
+                  },
+                  "value": {
+                    "description": "Value of the field\n\nLength limit: 1024 characters",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "name",
+                  "value"
+                ],
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "footer": {
+              "description": "Footer information\n\nSee https://discord.com/developers/docs/resources/channel#embed-object-embed-footer-structure",
+              "additionalProperties": false,
+              "properties": {
+                "icon_url": {
+                  "description": "URL of footer icon (only supports http(s) and attachments)",
+                  "type": "string"
+                },
+                "proxy_icon_url": {
+                  "description": "A proxied url of footer icon",
+                  "type": "string"
+                },
+                "text": {
+                  "description": "Footer text\n\nLength limit: 2048 characters",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "text"
+              ],
+              "type": "object"
+            },
+            "image": {
+              "description": "Image information\n\nSee https://discord.com/developers/docs/resources/channel#embed-object-embed-image-structure",
+              "additionalProperties": false,
+              "properties": {
+                "height": {
+                  "description": "Height of image",
+                  "type": "number"
+                },
+                "proxy_url": {
+                  "description": "A proxied url of the image",
+                  "type": "string"
+                },
+                "url": {
+                  "description": "Source url of image (only supports http(s) and attachments)",
+                  "type": "string"
+                },
+                "width": {
+                  "description": "Width of image",
+                  "type": "number"
+                }
+              },
+              "required": [
+                "url"
+              ],
+              "type": "object"
+            },
+            "provider": {
+              "description": "Provider information\n\nSee https://discord.com/developers/docs/resources/channel#embed-object-embed-provider-structure",
+              "additionalProperties": false,
+              "properties": {
+                "name": {
+                  "description": "Name of provider",
+                  "type": "string"
+                },
+                "url": {
+                  "description": "URL of provider",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            },
+            "thumbnail": {
+              "description": "Thumbnail information\n\nSee https://discord.com/developers/docs/resources/channel#embed-object-embed-thumbnail-structure",
+              "additionalProperties": false,
+              "properties": {
+                "height": {
+                  "description": "Height of thumbnail",
+                  "type": "number"
+                },
+                "proxy_url": {
+                  "description": "A proxied url of the thumbnail",
+                  "type": "string"
+                },
+                "url": {
+                  "description": "Source url of thumbnail (only supports http(s) and attachments)",
+                  "type": "string"
+                },
+                "width": {
+                  "description": "Width of thumbnail",
+                  "type": "number"
+                }
+              },
+              "required": [
+                "url"
+              ],
+              "type": "object"
+            },
+            "timestamp": {
+              "description": "Timestamp of embed content",
+              "type": "string"
+            },
+            "title": {
+              "description": "Title of embed\n\nLength limit: 256 characters",
+              "type": "string"
+            },
+            "type": {
+              "deprecated": "*Embed types should be considered deprecated and might be removed in a future API version*\n\nSee https://discord.com/developers/docs/resources/channel#embed-object-embed-types",
+              "description": "Type of embed (always \"rich\" for webhook embeds)",
+              "enum": [
+                "rich",
+                "image",
+                "video",
+                "gifv",
+                "article",
+                "link",
+                "auto_moderation_message"
+              ],
+              "type": "string"
+            },
+            "url": {
+              "description": "URL of embed",
+              "type": "string"
+            },
+            "video": {
+              "description": "Video information\n\nSee https://discord.com/developers/docs/resources/channel#embed-object-embed-video-structure",
+              "additionalProperties": false,
+              "properties": {
+                "height": {
+                  "description": "Height of video",
+                  "type": "number"
+                },
+                "proxy_url": {
+                  "description": "A proxied url of the video",
+                  "type": "string"
+                },
+                "url": {
+                  "description": "Source url of video",
+                  "type": "string"
+                },
+                "width": {
+                  "description": "Width of video",
+                  "type": "number"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "type": "object"
+        },
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "id",
+        "content",
+        "attachments",
+        "type",
+        "embed",
+        "buttons"
       ],
       "type": "object"
     },

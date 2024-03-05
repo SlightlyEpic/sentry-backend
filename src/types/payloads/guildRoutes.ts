@@ -27,3 +27,5 @@ export type SetAdwarnMessagePayload = { message: Message };
 
 export type SetReportStatusPayload = { status: boolean };
 export type SetReportsChannelPayload = { channel: string };
+
+export type SetMessageTemplatePayload = Message;
