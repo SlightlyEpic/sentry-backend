@@ -17,6 +17,10 @@ export default (services: Services): Router => {
 
     authRouter.get('/', async (req, res) => {
         const user = req.user as PassportUser;
+        if(!user) {
+            res.status(401).send({ message: 'Unauthorized' });
+            return;
+        }
         const discordUser = await services.userGuildsService.getDiscordUser(user.accessToken);
 
         if(user) {
