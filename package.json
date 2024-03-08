@@ -15,6 +15,9 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "_moduleAliases": {
+    "@": "./src/"
+  },
   "devDependencies": {
     "@apidevtools/json-schema-ref-parser": "^11.1.0",
     "@types/cors": "^2.8.17",
@@ -45,6 +48,7 @@
     "express-rate-limit": "^7.1.5",
     "express-session": "^1.17.3",
     "express-session-sqlite": "^2.1.1",
+    "module-alias": "^2.2.3",
     "mongodb": "^6.3.0",
     "passport": "^0.7.0",
     "passport-discord": "^0.1.4",
