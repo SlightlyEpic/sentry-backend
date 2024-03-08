@@ -30,6 +30,7 @@ export const ensurePermissions: (services: Services) => RequestHandler = (servic
 
         try {
             const allPerms = await serviceUser.getAllPermissions(req.params.guildId);
+            console.log(`${req.path}: user ${user.id} perms`, allPerms);
 
             // Allow if, role permission has MANAGE_GUILD or ADMINISTRATOR
             // or if permit permission has FULL_CONTROL

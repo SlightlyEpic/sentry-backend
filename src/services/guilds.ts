@@ -70,7 +70,7 @@ export class UserGuildManager {
         this.userId = userId;
         this.accessToken = accessToken;
         this.refreshToken = refreshToken;
-        this.permissionsCache = new TTLCache({ max: 10, ttl: 2 * 60 * 1000 });
+        this.permissionsCache = new TTLCache({ max: 10, ttl: 60 * 1000 });
 
         this.bot = botService;
         if(!this.bot.isInit) throw Error('Bot service must be initialized before being passed to UserGuilds constructor!');
@@ -94,8 +94,10 @@ export class UserGuildManager {
         };
 
         const rolePerms = new Set<string>();
-        const memberRoles = (await this.getGuildMember(guildId)).roles;
+        const member = await this.getGuildMember(guildId);
+        const memberRoles = member.roles;
         const guild = this.bot.getGuilds().get(guildId);
+        if(guild?.ownerId && guild.ownerId === member.user?.id) rolePerms.add('ADMINISTRATOR');
 
         if(!guild) return allPerms;
 
@@ -127,7 +129,14 @@ export class UserGuildManager {
         let member = await this.getGuildMember(guildId);
         let permissions = new Set<string>();
 
+        permits.custom_permits.forEach(p => {
+            p.roles = p.roles.map(r => r.toString());
+            p.users = p.users.map(u => u.toString());
+        });
+
+        console.log('Member roles:', member.roles);
         for(let permit of permits.custom_permits) {
+            console.log(`Permit ${permit.name}: roles`, permit.roles);
             for(let permitRole of permit.roles) {
                 if(member.roles.includes(permitRole)) {
                     permit.permissions.forEach(p => permissions.add(p));
