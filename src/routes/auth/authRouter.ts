@@ -11,8 +11,7 @@ export default (services: Services): Router => {
     });
 
     authRouter.get('/discord/redirect', passport.authenticate('discord'), (req, res) => {
-        if(process.env.NODE_ENV === 'development') res.redirect(`${process.env.VITE_ORIGIN}/login`);
-        else res.redirect(`${process.env.ORIGIN}/login`);
+        res.redirect(`${process.env.VITE_ORIGIN}/login`);
     });
 
     authRouter.get('/', async (req, res) => {
