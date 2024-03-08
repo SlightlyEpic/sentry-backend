@@ -16,6 +16,3 @@ temp/*
 
 # Example db data
 docs/example_data.json
-
-# One off scripts
-util

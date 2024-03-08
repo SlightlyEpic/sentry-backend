@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node dist/src/index.js",
+    "start": "node dist/index.js",
     "dev": "nodemon --watch .env --watch src src/index.ts",
-    "build": "tsc && pnpm postbuild",
+    "build": "tsc && resolve-tspaths && pnpm postbuild",
     "postbuild": "pnpm gen-ajv-schema && copyfiles --flat src/ajvSchema/*.json dist/ajvSchema",
     "lint": "eslint src --fix",
     "secretgen": "openssl rand -base64 16",
@@ -15,9 +15,6 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "_moduleAliases": {
-    "@": "./dist/src"
-  },
   "devDependencies": {
     "@apidevtools/json-schema-ref-parser": "^11.1.0",
     "@types/cors": "^2.8.17",
@@ -31,6 +28,7 @@
     "copyfiles": "^2.4.1",
     "eslint": "^8.56.0",
     "nodemon": "^3.0.3",
+    "resolve-tspaths": "^0.8.18",
     "ts-json-schema-generator": "^1.5.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.3.3"
@@ -47,7 +45,6 @@
     "express-rate-limit": "^7.1.5",
     "express-session": "^1.17.3",
     "express-session-sqlite": "^2.1.1",
-    "module-alias": "^2.2.3",
     "mongodb": "^6.3.0",
     "passport": "^0.7.0",
     "passport-discord": "^0.1.4",
